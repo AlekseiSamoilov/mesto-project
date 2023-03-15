@@ -1,0 +1,14 @@
+.profile__name-work-box {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    align-items: flex-end;
+}
+
+@media screen and (max-width: 767px) {
+
+    .profile__name-work-box {
+        gap: 10px;
+    }
+
+}

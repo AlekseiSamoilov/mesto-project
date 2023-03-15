@@ -1,0 +1,17 @@
+.popup {
+    margin: 0 auto;
+    width: 880px;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+}
+
+@media screen and (max-width: 767px) {
+    .popup {
+        width: 100%;
+    }
+}

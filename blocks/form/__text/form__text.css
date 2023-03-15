@@ -1,0 +1,30 @@
+.form__text {
+    width: 358px;
+    border: 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #bcbcc4;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    margin: 0 36px 30px 36px;
+}
+
+.form__text:last-child {
+    margin-bottom: 48px;
+}
+
+.form__text:focus {
+    outline-color: grey;
+}
+
+@media screen and (max-width: 767px) {
+    .form__text {
+        width: 238px;
+        margin: 0 22px 30px 22px;
+    }
+    
+    .form__text:last-child {
+        margin-bottom: 45px;
+    }
+}   
+

@@ -1,0 +1,9 @@
+.grid-item__reaction {
+    max-width: 100%;
+    display: grid;
+    padding-right: 30px;
+    grid-template-columns: auto 22px;
+    align-items: center;
+    gap: 15px;
+}
+

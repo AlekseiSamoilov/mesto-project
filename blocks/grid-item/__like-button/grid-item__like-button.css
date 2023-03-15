@@ -1,0 +1,14 @@
+.grid-item__like-button {
+    width: 22px;
+    height: 19px;
+    padding: 0;
+    background-color: white;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.grid-item__like-button:hover {
+    opacity: 0.5;
+}
