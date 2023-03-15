@@ -9,6 +9,8 @@
 
     .profile__name-work-box {
         gap: 10px;
+        transform: translateX(14px);
+        
     }
 
 }

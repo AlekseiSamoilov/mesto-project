@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     max-width: 336px;
+    /*position: relative;*/
 }
 
 @media screen and (max-width: 767px) {

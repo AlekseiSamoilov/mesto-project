@@ -1,6 +1,5 @@
 .profile__container {
     display: flex;
-    height: 120px;
     gap: 30px;
 }
 

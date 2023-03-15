@@ -3,11 +3,14 @@
     height: 50px;
     padding: 0;
     background-color: black;
-    border: 1px solid white;
+    border: 2px solid #FFFFFF;
     align-self: center;
     background-image: url(../../../images/add-cross.svg);
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 22px;
+    cursor: pointer;
+    border-radius: 2px;
 }
 
 .profile__add-button:hover {
@@ -22,5 +25,6 @@
         width: 282px;
         height: 50px;
         margin-top: 32px;
+        background-size: 16px;
     }
 }

@@ -9,34 +9,34 @@
 </head>
 
 <body class="page">
-    <section class="popup"> <!--  popup_closed  -->
+    <section class="popup popup_closed"> <!--  popup_closed  -->
         <div class="popup__container">
-            <button style="cursor:pointer;"
-                class="popup__close-button"></button>
+            <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <fieldset class="form">
-                <input type="text" class="form__text" id="name" value="Жак-Ив Кусто">
-                <input type="text" class="form__text" id="work" value="Исследователь океана">
-            </fieldset>
-            <button style="cursor:pointer;" class="popup__save-button" type="submit">Сохранить</button>
+            <form class="form" name="edit-from" method="#" action="#">
+                <input type="text" class="form__text" id="name" value="" placeholder="Жак-Ив Кусто">
+                <input type="text" class="form__text" id="work" value="" placeholder="Исследователь океана">
+            </form>
+            <button class="popup__save-button" type="submit">Сохранить</button>
         </div>
     </section>
-    <section aria-label="header" class="header">
+    <header aria-label="header" class="header">
         <a href="#"><img class="header__logo" src="images/mesto-logo-white.svg"
                 alt="белыми буквами на латинице написано слово место."></a>
-    </section>
+    </header>
+    <main>
     <section class="profile">
         <div class="profile__container">
             <img class="profile__avatar" src="images/image.jpg" alt="аватар пользователя.">
             <div class="profile__info-edit">
                 <div class="profile__name-work-box">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button style="cursor:pointer;" class="profile__edit-button"></button>
+                    <button  class="profile__edit-button" type="button"></button>
                 </div>
                 <p class="profile__work">Исследователь океана</p>
             </div>
         </div>
-        <button style="cursor:pointer;" class="profile__add-button"></button>
+        <button class="profile__add-button" type="button"></button>
     </section>
     <section class="elements">
         <div class="elements__box">
@@ -53,7 +53,7 @@
                     alt="поле и вершина эльбруса на заднем плане.">
                 <div class="grid-item__reaction">
                     <h2 class="grid-item__title">Гора Эльбрус</h2>
-                    <button class="grid-item__like-button grid-item__like-button_on"></button>
+                    <button class="grid-item__like-button grid-item__like-button_on" type="button"></button>
                 </div>
             </div>
             <div class="grid-item">
@@ -61,7 +61,7 @@
                     alt="лес и заснеженная вершина горы.">
                 <div class="grid-item__reaction">
                     <h2 class="grid-item__title">Домбай</h2>
-                    <button class="grid-item__like-button grid-item__like-button_on"></button>
+                    <button class="grid-item__like-button grid-item__like-button_on" type="button"></button>
                 </div>
             </div>
             <div class="grid-item">
@@ -69,7 +69,7 @@
                     alt="поле и вершина эльбруса на заднем плане.">
                 <div class="grid-item__reaction">
                     <h2 class="grid-item__title">Гора Эльбрус</h2>
-                    <button class="grid-item__like-button grid-item__like-button_off"></button>
+                    <button class="grid-item__like-button grid-item__like-button_off" type="button"></button>
                 </div>
             </div>
             <div class="grid-item">
@@ -77,7 +77,7 @@
                     alt="лес и заснеженная вершина горы.">
                 <div class="grid-item__reaction">
                     <h2 class="grid-item__title">Домбай</h2>
-                    <button class="grid-item__like-button grid-item__like-button_off"></button>
+                    <button class="grid-item__like-button grid-item__like-button_off" type="button"></button>
                 </div>
             </div>
             <div class="grid-item">
@@ -85,16 +85,16 @@
                     alt="разрушенное здание на фоне гор.">
                 <div class="grid-item__reaction">
                     <h2 class="grid-item__title">Карачаево-Черкессия</h2>
-                    <button class="grid-item__like-button grid-item__like-button_off"></button>
+                    <button class="grid-item__like-button grid-item__like-button_off" type="button"></button>
                 </div>
             </div>
         </div>
     </section>
-
     <footer class="footer">
         <div class="footer__box">
             <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
         </div>
     </footer>
-
+</main>
 </body>
+</html>
