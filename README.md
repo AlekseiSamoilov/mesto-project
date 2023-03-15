@@ -2,7 +2,7 @@
 
 ### Проект, позволяющий делиться и просматривать фотографии из путешествий и не только.
 
-* Посмотреть прроект можно [тут](https://alekseisamoilov.github.io/mesto-project/index.html)
+* Посмотреть проект можно [тут](https://alekseisamoilov.github.io/mesto-project/index.html)
 
 Используемые технологии:
 * HTML
