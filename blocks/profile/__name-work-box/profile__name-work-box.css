@@ -3,6 +3,7 @@
     align-items: center;
     gap: 18px;
     align-items: flex-end;
+    max-width: 336px;
 }
 
 @media screen and (max-width: 767px) {
@@ -10,7 +11,7 @@
     .profile__name-work-box {
         gap: 10px;
         transform: translateX(14px);
-        
+        z-index: -1;
     }
 
 }
