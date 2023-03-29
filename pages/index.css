@@ -36,7 +36,6 @@
 @import url(../blocks/grid-item/__title/grid-item__title.css);
 @import url(../blocks/grid-item/__like-button/grid-item__like-button.css);
 @import url(../blocks/grid-item/__like-button/_on/grid-item__like-button_on.css);
-@import url(../blocks/grid-item/__like-button/_off/grid-item__like-button_off.css);
 /*---------footer-------------*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__box/footer__box.css);
