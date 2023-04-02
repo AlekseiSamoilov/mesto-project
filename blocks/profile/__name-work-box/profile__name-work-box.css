@@ -3,7 +3,7 @@
     align-items: center;
     gap: 18px;
     align-items: flex-end;
-    max-width: 336px;
+    width: 336px;
 }
 
 @media screen and (max-width: 767px) {

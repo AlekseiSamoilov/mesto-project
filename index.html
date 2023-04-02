@@ -14,9 +14,20 @@
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="form" name="edit-from" method="post" action="#">
-                <input type="text" class="form__text" id="name" value="" placeholder="Жак-Ив Кусто">
-                <input type="text" class="form__text" id="work" value="" placeholder="Исследователь океана">
+                <input type="text" class="form__text" id="name" value="Жак-Ив Кусто">
+                <input type="text" class="form__text" id="work" value="Исследователь океана">
                 <button class="popup__save-button" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <section class="new-item"> <!-- new-item_opened -->
+        <div class="new-item__container">
+            <button class="new-item__close-button" type="button"></button>
+            <h2 class="new-item__title">Новое место</h2>
+            <form class="form form-new-item" name="edit-from" method="post" action="#">
+                <input type="text" class="form__text" id="title" value="" placeholder="Название">
+                <input type="text" class="form__text" id="link" value="" placeholder="Ссылка на картинку">
+                <button class="new-item__save-button" type="submit">Создать</button>
             </form>
         </div>
     </section>
@@ -97,6 +108,17 @@
             <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
         </div>
     </footer>
+    <template id="add-new-item">
+        <div class="grid-item">
+            <img class="grid-item__photo" src=""
+                alt="фото места">
+            <div class="grid-item__reaction">
+                <h2 class="grid-item__title"></h2>
+                <button class="grid-item__like-button" type="button"></button>
+         </div>
+    </div>
+    </template>
+    <!----Скрипт открытия закртытия профиля-->
     <script>
         let popup = document.querySelector('.popup');
         let editButton = document.querySelector('.profile__edit-button');
@@ -105,22 +127,75 @@
         }
         editButton.addEventListener('click', editInfo);
         let closeButton = document.querySelector('.popup__close-button');
-        let popupOpened = document.querySelector('.popupOpened');
+        let popupOpened = document.querySelector('.popup_opened');
         function closeInfo() {
             popup.classList.remove('popup_opened');
         }
         closeButton.addEventListener('click', closeInfo);
     </script>
+    <!----Скрипт открытия закртытия окна добавления нового элемента-->
+    <script>
+        let newItem = document.querySelector('.new-item');
+        let addButton = document.querySelector('.profile__add-button');
+        function addItem() {
+            newItem.classList.add('new-item_opened');
+        }
+        addButton.addEventListener('click', addItem);
+        let closeNewItemButton = document.querySelector('.new-item__close-button');
+        let newItemOpened = document.querySelector('.new-item_opened');
+        function closeAddForm() {
+            newItem.classList.remove('new-item_opened');
+        }
+        closeNewItemButton.addEventListener('click', closeAddForm);
+    </script>
+    <!----Скрипт поставить удалить лайк-->
     <script>
         /*document.querySelector('.grid-item__like-button').addEventListener('click', function (evt) {
             evt.target.classList.toggle('grid-item__like-button_on');
         })*/
         let likeButton = document.querySelectorAll('.grid-item__like-button');
         for (let i = 0; i < likeButton.length; i++) {
-            likeButton[i].addEventListener('click', function() {
+            likeButton[i].addEventListener('click', function () {
                 likeButton[i].classList.toggle('grid-item__like-button_on');
             });
         }
+    </script>
+    <!----Скрипт редактирования информации в профиле-->
+    <script>
+        const formElement = document.querySelector('.form');
+        const nameInput = formElement.querySelector('#name');
+        const jobInput = formElement.querySelector('#work');
+        function formSubmitHandler(evt) {
+            evt.preventDefault();
+            nameInput.getAttribute('value');
+            jobInput.getAttribute('value');
+            const profileName = document.querySelector('.profile__name');
+            const profileWork = document.querySelector('.profile__work');
+            profileName.textContent = nameInput.value;
+            profileWork.textContent = jobInput.value;
+        const saveButton = document.querySelector('.popup__save-button');
+        saveButton.addEventListener('click', closeInfo);
+        }
+        formElement.addEventListener('submit', formSubmitHandler);
+    </script>
+    <!----Скрипт добавления нового элемента-->
+    <script>
+            const itemTemplate = document.querySelector('#add-new-item').content;
+            const gridItem = itemTemplate.querySelector('.grid-item').cloneNode(true);
+            const formNewItem = document.querySelector('.form-new-item');
+            const titleInput = formElement.querySelector('#title');
+            const linkInput = formElement.querySelector('#link');
+            const elementBox = document.querySelector('.elements__box');
+        function addNewItem() {
+            titleInput.getAttribute('value');
+            linkInput.getAttribute('value');
+            gridItem.querySelector('.grid-item__photo').src = linkInput.value;
+            gridItem.querySelector('.grid-item__title').textContent = titleInput.value;
+            elementBox.append(gridItem);
+        }
+        const createButton = document.querySelector('.new-item__save-button');
+            createButton.addEventListener('click', addNewItem);
+            formNewItem.addEventListener('submit', addNewItem);
     </script>
 </body>
 
