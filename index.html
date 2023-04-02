@@ -9,7 +9,7 @@
 </head>
 
 <body class="page">
-    <section class="popup"> <!-- popup_opened ss--> 
+    <section class="popup"> <!-- popup_opened -->
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -46,7 +46,7 @@
                         alt="разрушенное здание на фоне гор.">
                     <div class="grid-item__reaction">
                         <h2 class="grid-item__title">Карачаевск</h2>
-                        <button class="grid-item__like-button grid-item__like-button_off" type="button"></button>
+                        <button class="grid-item__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="grid-item">
@@ -54,7 +54,7 @@
                         alt="поле и вершина эльбруса на заднем плане.">
                     <div class="grid-item__reaction">
                         <h2 class="grid-item__title">Гора Эльбрус</h2>
-                        <button class="grid-item__like-button grid-item__like-button_on" type="button"></button>
+                        <button class="grid-item__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="grid-item">
@@ -62,7 +62,7 @@
                         alt="лес и заснеженная вершина горы.">
                     <div class="grid-item__reaction">
                         <h2 class="grid-item__title">Домбай</h2>
-                        <button class="grid-item__like-button grid-item__like-button_on" type="button"></button>
+                        <button class="grid-item__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="grid-item">
@@ -70,7 +70,7 @@
                         alt="поле и вершина эльбруса на заднем плане.">
                     <div class="grid-item__reaction">
                         <h2 class="grid-item__title">Гора Эльбрус</h2>
-                        <button class="grid-item__like-button grid-item__like-button_off" type="button"></button>
+                        <button class="grid-item__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="grid-item">
@@ -78,7 +78,7 @@
                         alt="лес и заснеженная вершина горы.">
                     <div class="grid-item__reaction">
                         <h2 class="grid-item__title">Домбай</h2>
-                        <button class="grid-item__like-button grid-item__like-button_off" type="button"></button>
+                        <button class="grid-item__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="grid-item">
@@ -86,7 +86,7 @@
                         alt="разрушенное здание на фоне гор.">
                     <div class="grid-item__reaction">
                         <h2 class="grid-item__title">Карачаево-Черкессия</h2>
-                        <button class="grid-item__like-button grid-item__like-button_off" type="button"></button>
+                        <button class="grid-item__like-button" type="button"></button>
                     </div>
                 </div>
             </div>
@@ -107,18 +107,14 @@
         let closeButton = document.querySelector('.popup__close-button');
         let popupOpened = document.querySelector('.popupOpened');
         function closeInfo() {
-            /*popup.setAttribute('style', `
-            visibility: visible;
-            opacity: 0;`);
-            popupOpened.setAttribute('style', `
-            visibility: hidden;
-            opacity: 1;
-            transition: visibility 0s, opacity 0.5s linear;`);*/
             popup.classList.remove('popup_opened');
         }
         closeButton.addEventListener('click', closeInfo);
     </script>
     <script>
+        /*document.querySelector('.grid-item__like-button').addEventListener('click', function (evt) {
+            evt.target.classList.toggle('grid-item__like-button_on');
+        })*/
         let likeButton = document.querySelectorAll('.grid-item__like-button');
         for (let i = 0; i < likeButton.length; i++) {
             likeButton[i].addEventListener('click', function() {
