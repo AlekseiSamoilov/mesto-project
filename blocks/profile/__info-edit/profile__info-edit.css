@@ -1,8 +1,7 @@
 .profile__info-edit {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 336px;
-    /*position: relative;*/
+    max-width: 336px; 
+    flex-direction: column;
 }
 
 @media screen and (max-width: 767px) {
@@ -10,6 +9,7 @@
     .profile__info-edit {
         justify-content: center;
         gap: 14px;
+        flex-direction: column;
     }
 
 }
