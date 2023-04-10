@@ -1,13 +1,16 @@
 //Скрипт открытия закртытия профиля
 
-let popup = document.querySelector('.popup');
-let editButton = document.querySelector('.profile__edit-button');
+// получили ссылку на элемент popup и записали его в переменную popup
+const popup = document.querySelector('.popup'); 
+// получили ссылку на кнопку редактирования профиля и записали ее в переменную editButton
+const editButton = document.querySelector('.profile__edit-button'); 
+// создаем фуркнцию
 function editInfo() {
     popup.classList.add('popup_opened');
 }
 editButton.addEventListener('click', editInfo);
-let closeButton = document.querySelector('.popup__close-button');
-let popupOpened = document.querySelector('.popup_opened');
+const closeButton = document.querySelector('.popup__close-button');
+const popupOpened = document.querySelector('.popup_opened');
 function closeInfo() {
     popup.classList.remove('popup_opened');
 }
@@ -17,14 +20,14 @@ closeButton.addEventListener('click', closeInfo);
 //Скрипт открытия закртытия окна добавления нового элемента-->
 
 
-let newItem = document.querySelector('.new-item');
-let addButton = document.querySelector('.profile__add-button');
+const newItem = document.querySelector('.new-item');
+const addButton = document.querySelector('.profile__add-button');
 function addItem() {
     newItem.classList.add('new-item_opened');
 }
 addButton.addEventListener('click', addItem);
-let closeNewItemButton = document.querySelector('.new-item__close-button');
-let newItemOpened = document.querySelector('.new-item_opened');
+const closeNewItemButton = document.querySelector('.new-item__close-button');
+const newItemOpened = document.querySelector('.new-item_opened');
 function closeAddForm() {
     newItem.classList.remove('new-item_opened');
 }
@@ -43,7 +46,6 @@ function formSubmitHandler(evt) {
     const profileWork = document.querySelector('.profile__work');
     profileName.textContent = nameInput.value;
     profileWork.textContent = jobInput.value;
-
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
@@ -63,9 +65,9 @@ const createButton = document.querySelector('.new-item__save-button');
 
 
 function addNewItem(evt) {
-    let newItems = document.querySelector('#add-new-item').content;
-    let newrow = newItems.querySelector('.grid-item').cloneNode(true);
-    let oldElements = document.querySelector('.elements__box');
+    const newItems = document.querySelector('#add-new-item').content;
+    const newrow = newItems.querySelector('.grid-item').cloneNode(true);
+    const oldElements = document.querySelector('.elements__box');
     oldElements.prepend(newrow);
     evt.preventDefault();
     newItemTitle.getAttribute('value');
@@ -74,8 +76,9 @@ function addNewItem(evt) {
     const newImg = document.querySelector('.grid-item__photo');
     newPara.textContent = newItemTitle.value;
     newImg.src = newItemImg.value;
+    newImg.alt = newItemTitle.value;
     //лайк новых карточек
-    let likeButton = document.querySelector('.grid-item__like-button');
+    const likeButton = document.querySelector('.grid-item__like-button');
     likeButton.addEventListener('click', (evt) => {
         evt.target.classList.toggle('grid-item__like-button_on');
     })
@@ -87,47 +90,82 @@ newItemForm.addEventListener('submit', addNewItem);
 // Шесть карточек
 const initialCards = [
     {
-        title: 'Ростов-на-Дону',
-        link: 'https://images.unsplash.com/photo-1585244436445-0f11adaa8fbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fCVEMCVBMCVEMCVCRSVEMSU4MSVEMSU4MiVEMCVCRSVEMCVCMnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
-    },
-    {
-        title: 'Владикавказ',
-        link: 'https://images.unsplash.com/photo-1665584928954-598441931504?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8JUQwJTkyJUQwJUJCJUQwJUIwJUQwJUI0JUQwJUI4JUQwJUJBJUQwJUIwJUQwJUIyJUQwJUJBJUQwJUIwJUQwJUI3fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-    },
-    {
-        title: 'Владивосток',
-        link: 'https://images.unsplash.com/photo-1645796382641-0287bfd3dcc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
-    },
-    {
-        title: 'Псков',
-        link: 'https://images.unsplash.com/photo-1662389090005-13c94f7249a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8JUQwJTlGJUQxJTgxJUQwJUJBJUQwJUJFJUQwJUIyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-    },
-    {
-        title: 'Санкт-Петербург',
-        link: 'https://images.unsplash.com/photo-1615023216764-bfd001b094fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-    },
-    {
-        title: 'Воронеж',
-        link: 'https://images.unsplash.com/photo-1616398201291-56a3fa55457a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80g'
-    }
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+      },
+      {
+        name: 'Саратов',
+        link: 'https://images.unsplash.com/photo-1680295820898-91223dc2705f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8RnpvM3p1T0hONnd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60'
+      },
+      {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+      },
+      {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+      },
+      {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+      },
+      {
+        name: 'Магадан',
+        link: 'https://images.unsplash.com/photo-1680034200933-09075ddb0843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDE5fEZ6bzN6dU9ITjZ3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
+      }
+    
 ];
 
-const cardsContainer = document.querySelector('.elements__box');
-
 initialCards.forEach(item => {
-    let newItems = document.querySelector('#add-new-item').content;
-    let newrow = newItems.querySelector('.grid-item').cloneNode(true);
-    let oldElements = document.querySelector('.elements__box');
+    const newItems = document.querySelector('#add-new-item').content;
+    const newrow = newItems.querySelector('.grid-item').cloneNode(true);
+    const oldElements = document.querySelector('.elements__box');
     oldElements.prepend(newrow);
     const newPara = document.querySelector('.grid-item__title');
     const newImg = document.querySelector('.grid-item__photo');
-    newPara.textContent = item.title;
+    newPara.textContent = item.name;
     newImg.src = item.link;
-    let likeButton = document.querySelector('.grid-item__like-button');
+    const likeButton = document.querySelector('.grid-item__like-button');
     likeButton.addEventListener('click', (evt) => {
     evt.target.classList.toggle('grid-item__like-button_on');
 })
 });
 
 
+// удаление карточки
+const elementsBox = document.querySelector('.elements__box')
+
+elementsBox.addEventListener('click', (evt) => {
+    const target = evt.target;
+    if (target.classList.contains('grid-item__trash')) {
+      const gridItem = target.closest('.grid-item');
+      gridItem.remove();
+    }
+  });
+
+
+// Открытие попапа с картинкой
+const photos = document.querySelectorAll('.grid-item__photo');
+const popupImage = document.querySelector('.image-popup__pic');
+const imgCloseButton = document.querySelector('.image-popup__close-button');
+const openImg = document.querySelector('.image-popup');
+const caption = document.querySelector('.image-popup__caption');
+
+elementsBox.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('grid-item__photo')) {
+      evt.preventDefault();
+      const imageLink = evt.target.src;
+      popupImage.src = imageLink;
+      const gridTitle = evt.target.parentNode.querySelector('.grid-item__title').textContent;
+      caption.textContent = gridTitle;
+    const popupOn = document.querySelector('.image-popup');
+    popupOn.classList.add('image-popup_opened');
+    }
+  });
+
+
+// Закрытие попапа с картинкой 
+  imgCloseButton.addEventListener('click', () => {
+    openImg.classList.remove('image-popup_opened');
+})
 

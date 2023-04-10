@@ -31,6 +31,14 @@
             </form>
         </div>
     </section>
+    <section class="image-popup"><!-- image-popup_opened -->
+        <figure class="image-popup__container"> 
+            <button class="image-popup__close-button"></button>
+             <img class="image-popup__pic" src=''>
+             <figcaption class="image-popup__caption"></figcaption>
+        </figure>
+    </section>
+    
     <header aria-label="header" class="header">
         <a href="#"><img class="header__logo" src="images/mesto-logo-white.svg"
                 alt="белыми буквами на латинице написано слово место."></a>
@@ -110,6 +118,7 @@
     </footer>
     <template id="add-new-item">
         <div class="grid-item">
+            <button class="grid-item__trash"></button>
             <img class="grid-item__photo" src=" "
                 alt="фото места">
             <div class="grid-item__reaction">

@@ -46,7 +46,15 @@
 @import url(../blocks/grid-item/__title/grid-item__title.css);
 @import url(../blocks/grid-item/__like-button/grid-item__like-button.css);
 @import url(../blocks/grid-item/__like-button/_on/grid-item__like-button_on.css);
+@import url(../blocks/grid-item/__trash/grid-item__trash.css);
 /*---------footer-------------*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__box/footer__box.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+/* image-popup */
+@import url(../blocks/image-popup/image-popup.css);
+@import url(../blocks/image-popup/__container/image-popup__container.css);
+@import url(../blocks/image-popup/__close-button/image-popup__close-button.css);
+@import url(../blocks/image-popup/_opened/image-popup_opened.css);
+@import url(../blocks/image-popup/__pic/image-popup__pic.css);
+@import url(../blocks/image-popup/__caption/image-popup__caption.css);
