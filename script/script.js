@@ -1,37 +1,53 @@
 //Скрипт открытия закртытия профиля
 
-// получили ссылку на элемент popup и записали его в переменную popup
+
 const popup = document.querySelector('.popup'); 
-// получили ссылку на кнопку редактирования профиля и записали ее в переменную editButton
 const editButton = document.querySelector('.profile__edit-button'); 
-// создаем фуркнцию
+// const closeButton = document.querySelector('.popup__close-button');
+const popupOpened = document.querySelector('.popup_opened');
+
+
+
 function editInfo() {
     popup.classList.add('popup_opened');
 }
 editButton.addEventListener('click', editInfo);
-const closeButton = document.querySelector('.popup__close-button');
-const popupOpened = document.querySelector('.popup_opened');
-function closeInfo() {
-    popup.classList.remove('popup_opened');
-}
-closeButton.addEventListener('click', closeInfo);
 
 
+// function closeInfo() {
+//     popup.classList.remove('popup_opened');
+// }
+// closeButton.addEventListener('click', closeInfo);
 //Скрипт открытия закртытия окна добавления нового элемента-->
 
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
 
-const newItem = document.querySelector('.new-item');
+// находим все крестики проекта по универсальному селектору
+const closeButtons = document.querySelectorAll('.popup__close-button');
+
+closeButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап 
+  const popup = button.closest('.popup');
+  // устанавливаем обработчик закрытия на крестик
+  button.addEventListener('click', () => closePopup(popup));
+});
+
+const newItem = document.querySelector('.new-item-popup');
 const addButton = document.querySelector('.profile__add-button');
+
 function addItem() {
-    newItem.classList.add('new-item_opened');
+    newItem.classList.add('popup_opened');
 }
 addButton.addEventListener('click', addItem);
-const closeNewItemButton = document.querySelector('.new-item__close-button');
-const newItemOpened = document.querySelector('.new-item_opened');
-function closeAddForm() {
-    newItem.classList.remove('new-item_opened');
-}
-closeNewItemButton.addEventListener('click', closeAddForm);
+
+// const closeNewItemButton = document.querySelector('.popup__close-button');
+
+// function closeAddForm() {
+//     newItem.classList.remove('popup_opened');
+// }
+// closeNewItemButton.addEventListener('click', closeAddForm);
 
 
 // <!----Скрипт редактирования информации в профиле-->
@@ -50,8 +66,8 @@ function formSubmitHandler(evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 
-const saveButton = document.querySelector('.popup__save-button');
-saveButton.addEventListener('click', closeInfo);
+// const saveButton = document.querySelector('.popup__save-button');
+// saveButton.addEventListener('click', closePopup);
 
 
 
@@ -166,6 +182,6 @@ elementsBox.addEventListener('click', (evt) => {
 
 // Закрытие попапа с картинкой 
   imgCloseButton.addEventListener('click', () => {
-    openImg.classList.remove('image-popup_opened');
+    openImg.classList.remove('popup_opened');
 })
 

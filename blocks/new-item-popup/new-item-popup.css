@@ -1,4 +1,4 @@
-.new-item {
+/* .new-item-popup {
     margin: 0 auto;
     width: 880px;
     height: 100%;
@@ -13,7 +13,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .new-item {
+    .new-item-popup {
         width: 100%;
     }
-}
+}  */
