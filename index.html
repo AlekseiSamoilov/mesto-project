@@ -9,29 +9,29 @@
 </head>
 
 <body class="page">
-    <section class="popup"> <!-- popup_opened  profile-popup-->
+    <section class="popup profile-popup"> <!-- popup_opened  profile-popup-->
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="form" name="edit-from" method="post" action="#">
-                <input type="text" class="form__text" id="name" value="Жак-Ив Кусто">
-                <input type="text" class="form__text" id="work" value="Исследователь океана">
+                <input type="text" class="new-item-form__text" id="name" value="Жак-Ив Кусто">
+                <input type="text" class="new-item-form__text" id="work" value="Исследователь океана">
                 <button class="popup__save-button" type="submit">Сохранить</button>
             </form>
         </div>
     </section>
-    <section class="popup"> <!--popup_opened  new-item-popup-->
-        <div class="new-item__container">
+    <section class="popup new-item-popup"> <!--popup_opened  new-item-popup-->
+        <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
-            <h2 class="new-item__title">Новое место</h2>
+            <h2 class="popup__title">Новое место</h2>
             <form class="new-item-form" name="edit-from" method="post" action="#">
-                <input type="text" class="new-item-form__text" id="title" value="" placeholder="Название">
-                <input type="text" class="new-item-form__text" id="link" value="" placeholder="Ссылка на картинку">
-                <button class="new-item__save-button" type="submit">Создать</button>
+                <input type="text" class="form__text" id="title" value="" placeholder="Название">
+                <input type="text" class="form__text" id="link" value="" placeholder="Ссылка на картинку">
+                <button class="popup__save-button" type="submit">Создать</button>
             </form>
         </div>
     </section>
-    <section class="popup"> <!--popup_opened  image-popup-->
+    <section class="popup image-popup"> <!--popup_opened  image-popup-->
         <figure class="image-popup__container"> 
             <button class="popup__close-button"></button>
              <img class="image-popup__pic" src=''>
@@ -50,13 +50,13 @@
                 <div class="profile__info-edit">
                     <div class="profile__name-work-box">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button" type="button"></button>
+                        <button class="profile__edit-button open-button" type="button"></button>
                     </div>
 
                     <p class="profile__work">Исследователь океана</p>
                 </div>
             </div>
-            <button class="profile__add-button" type="button"></button>
+            <button class="profile__add-button open-button" type="button"></button>
         </section>
         <section class="elements">
             <div class="elements__box">

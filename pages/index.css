@@ -12,11 +12,11 @@
 @import url(../blocks/popup/__save-button/popup__save-button.css);
 /*---------new-item popup-------------*/
 /* @import url(../blocks/new-item-popup/new-item.css); */
-@import url(../blocks/new-item-popup/_opened/new-item_opened.css);
-@import url(../blocks/new-item-popup/__container/new-item__container.css);
-@import url(../blocks/new-item-popup/__title/new-item__title.css);
-@import url(../blocks/new-item-popup/__close-button/new-item__close-button.css);
-@import url(../blocks/new-item-popup/__save-button/new-item__save-button.css);
+/* @import url(../blocks/new-item-popup/_opened/new-item_opened.css); */
+/* @import url(../blocks/new-item-popup/__container/new-item__container.css);*/
+/* @import url(../blocks/new-item-popup/__title/new-item__title.css); */
+/* @import url(../blocks/new-item-popup/__close-button/new-item__close-button.css);
+@import url(../blocks/new-item-popup/__save-button/new-item__save-button.css); */ 
 /*---------form-------------*/
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__text/form__text.css);
@@ -55,6 +55,9 @@
 /* @import url(../blocks/image-popup/image-popup.css); */
 @import url(../blocks/image-popup/__container/image-popup__container.css);
 @import url(../blocks/image-popup/__close-button/image-popup__close-button.css);
-@import url(../blocks/image-popup/_opened/image-popup_opened.css);
+/* @import url(../blocks/image-popup/_opened/image-popup_opened.css); */
 @import url(../blocks/image-popup/__pic/image-popup__pic.css);
 @import url(../blocks/image-popup/__caption/image-popup__caption.css);
+
+
+@import url(../blocks/open-button.css);
