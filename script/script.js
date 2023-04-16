@@ -1,6 +1,9 @@
 //Скрипт открытия закртытия профиля
 
-const popup = document.querySelector('.popup');
+const profilePopup = document.querySelector('.profile-popup');
+const newItemPopup = document.querySelector('.new-item-popup');
+const imagePopup = document.querySelector('.popup__image-popup');
+
 const editButton = document.querySelector('.profile__edit-button');
 const popupOpened = document.querySelector('.popup_opened');
 const openButtons = document.querySelectorAll('.open-button');
@@ -24,15 +27,7 @@ const oldElements = document.querySelector('.elements__box');
 
 const likeButton = document.querySelector('.grid-item__like-button');
 
-const popupOn = document.querySelector('.popup__image-popup');
 
-
-
-const saveButton = document.querySelectorAll('.popup__save-button');
-saveButton.forEach((button) => {
-  const subform = button.closest('.popup');
-  button.addEventListener('click', () => saveAndCloseForm(subform));
-});
 
 //Функция закрытия любого попапа
 function closePopup(popup) {
@@ -46,25 +41,20 @@ closeButtons.forEach((button) => {
   // устанавливаем обработчик закрытия на крестик
   button.addEventListener('click', () => closePopup(popup));
 });
-// функция закрытия попапа создания нового элемента по кнопки создать
-function saveAndCloseForm(subform) {
-  subform.classList.remove('popup_opened');
-}
-// функция открытия любого попапа
 
+// функция открытия любого попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
 // Открытие попапа добавления нового элемента
 addButton.addEventListener('click', () => {
-  const popup = document.querySelector('.new-item-popup');
-  openPopup(popup);
+  openPopup(newItemPopup);
 });
+
 // Открытие попапа редактирования профиля
 editButton.addEventListener('click', () => {
-  const popup = document.querySelector('.popup');
-  openPopup(popup);
+  openPopup(profilePopup);
 });
 
 // удаление карточки
@@ -90,10 +80,10 @@ elementsBox.addEventListener('click', (evt) => {
     evt.preventDefault();
     const imageLink = evt.target.src;
     popupImage.src = imageLink;
-    const gridTitle = evt.target.parentNode.querySelector('.grid-item__title').textContent;
+    const gridTitle = evt.target.closest('.grid-item').querySelector('.grid-item__title').textContent;
     caption.textContent = gridTitle;
     popupImage.alt = gridTitle;
-    popupOn.classList.add('popup_opened');
+    openPopup(imagePopup);
   }
 });
 
@@ -104,19 +94,9 @@ function editProfile(evt) {
   jobInput.getAttribute('value');
   profileName.textContent = nameInput.value;
   profileWork.textContent = jobInput.value;
-  closePopup(popup)
+  closePopup(profilePopup);
 }
 formElement.addEventListener('submit', editProfile);
-
-// const saveButton = document.querySelector('.popup__save-button');
-// saveButton.addEventListener('click', closePopup);
-
-
-// const likeButton = document.querySelector('.grid-item__like-button');
-// likeButton.addEventListener('click', (evt) => {
-//   evt.target.classList.toggle('grid-item__like-button_on');
-// })
-
 
 // Создание новой карточки
 function createCard(title, imgSrc, imgAlt) {
@@ -140,7 +120,8 @@ function addNewItem(evt) {
   const imgAlt = newItemTitle.value;
   const card = createCard(title, imgSrc, imgAlt);
   oldElements.prepend(card);
-  saveAndCloseForm(subform)
+  evt.target.reset()
+  closePopup(newItemPopup);
 }
 newItemForm.addEventListener('submit', addNewItem);
 
@@ -182,42 +163,3 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-
-
-
-
-
-// initialCards.forEach(item => {
-//   const newItems = document.querySelector('#add-new-item').content;
-//   const newrow = newItems.querySelector('.grid-item').cloneNode(true);
-//   // const oldElements = document.querySelector('.elements__box');
-//   elementsBox.prepend(newrow);
-//   const newPara = document.querySelector('.grid-item__title');
-//   const newImg = document.querySelector('.grid-item__photo');
-//   newPara.textContent = item.name;
-//   newImg.src = item.link;
-// });
-
-// function addNewItem(evt) {
-//   evt.preventDefault();
-//   newItemTitle.getAttribute('value');
-//   newItemImg.getAttribute('value');
-//   const newItems = document.querySelector('#add-new-item').content;
-//   const newrow = newItems.querySelector('.grid-item').cloneNode(true);
-//   const oldElements = document.querySelector('.elements__box');
-//   oldElements.prepend(newrow);
-
-//   const newPara = document.querySelector('.grid-item__title');
-//   const newImg = document.querySelector('.grid-item__photo');
-
-//   newPara.textContent = newItemTitle.value;
-//   newImg.src = newItemImg.value;
-//   newImg.alt = newItemTitle.value;
-//   const likeButton = document.querySelector('.grid-item__like-button');
-//   likeButton.addEventListener('click', (evt) => {
-//     evt.target.classList.toggle('grid-item__like-button_on');
-//   })
-//   closePopup(popup)
-// }
-// newItemForm.addEventListener('submit', addNewItem);
