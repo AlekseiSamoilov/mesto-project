@@ -17,6 +17,9 @@
 /* form */
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__text/form__text.css);
+@import url(../blocks/form/__input_type_error/form__input_type_error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/__input-error_active/form__input-error_active.css);
 /*---------header-------------*/
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);

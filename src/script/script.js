@@ -1,4 +1,4 @@
-//Скрипт открытия закртытия профиля
+
 
 const profilePopup = document.querySelector('.profile-popup');
 const newItemPopup = document.querySelector('.new-item-popup');
@@ -19,15 +19,85 @@ const nameInput = formElement.querySelector('#name');
 const jobInput = formElement.querySelector('#work');
 const profileName = document.querySelector('.profile__name');
 const profileWork = document.querySelector('.profile__work');
+
+const formInput = formElement.querySelector('.form__text');
+// const formError = formElement.querySelector(`.${formInput.id}-error`);
 // переменные создания нового элемента
 const newItemForm = document.querySelector('form[name="new-form"]');
 const newItemTitle = newItemForm.querySelector('#title');
 const newItemImg = newItemForm.querySelector('#link')
 const oldElements = document.querySelector('.elements__box');
-
 const likeButton = document.querySelector('.grid-item__like-button');
 
+// регулярное выражение для проверки символов 
+const latinAndCyrillicRegex = /^[A-Za-zА-Яа-яЁё\s-]+$/;
 
+// переменная для показа ошибки в случаи несовпадения с требуемыми символами
+const errorMessages = {
+  invalidCharacters: 'Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы',
+};
+
+const submitButton = formElement.querySelector('#submitButton');
+
+// функция добавление красного поля и ошибки
+const showError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('form__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__input-error_active');
+};
+// функция удаления красного поля и ошибки
+const hideError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('form__input_type_error');
+  errorElement.classList.remove('form__input-error_active');
+  errorElement.textContent = '';
+}
+// функция проверки валидации пустого поля, количества символов и допустимости символов
+
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showError(formElement, inputElement, inputElement.validationMessage);
+  } else if (inputElement.id !== 'link' && !latinAndCyrillicRegex.test(inputElement.value)){
+    showError(formElement, inputElement, errorMessages.invalidCharacters)
+  } else {
+    hideError(formElement, inputElement);
+  }
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid || inputElement.id !== 'link'&& !latinAndCyrillicRegex.test(inputElement.value);
+  })
+}
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
+  } else {
+    buttonElement.disabled = false;
+  }
+}
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.form__text'));
+  const buttonElement = formElement.querySelector('.form__submit');
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+};
+
+formElement.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+});
+formInput.addEventListener('input', function () {
+  checkInputValidity(formElement, formInput);
+});
+
+setEventListeners(profilePopup);
+setEventListeners(newItemPopup);
 
 //Функция закрытия любого попапа
 function closePopup(popup) {
@@ -97,6 +167,9 @@ function editProfile(evt) {
   closePopup(profilePopup);
 }
 formElement.addEventListener('submit', editProfile);
+
+//Валидации редактирования профиля
+
 
 // Создание новой карточки
 function createCard(title, imgSrc, imgAlt) {
