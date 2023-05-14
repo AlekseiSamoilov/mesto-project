@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css">
+    <!-- <link rel="stylesheet" href="pages/index.css"> -->
     <title>Mesto</title>
 </head>
 
@@ -13,7 +13,7 @@
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="form" name="edit-form" method="post" action="#">
+            <form class="form edit-form" name="edit-form" method="post" action="#">
                 <input type="text" class="form__text" id="name" required minlength="2" maxlength="40" value="Жак-Ив Кусто">
                 <span class="form__input-error name-error"></span>
                 <input type="text" class="form__text" id="work" required minlength="2" maxlength="200" value="Исследователь океана">
@@ -27,10 +27,10 @@
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form class="form" name="new-form" method="post" action="#"> 
+            <form class="form new-form" name="new-form" method="post" action="#"> 
                 <input type="text" class="form__text" id="title" required minlength="2" maxlength="40"  placeholder="Название">
                 <span class="form__input-error title-error"></span>
-                <input type="url" class="form__text" id="link"  placeholder="Ссылка на картинку">
+                <input type="url" class="form__text" id="link" required  placeholder="Ссылка на картинку">
                 <span class="form__input-error link-error"></span>
                 <button class="popup__save-button form__submit" type="submit">Создать</button>
             </form>
@@ -45,13 +45,13 @@
     </section>
     
     <header aria-label="header" class="header">
-        <a href="#"><img class="header__logo" src="images/mesto-logo-white.svg"
-                alt="белыми буквами на латинице написано слово место."></a>
+        <a href="#"><img class="header__logo" src="<%=require('./images/mesto-logo-white.svg')%>"
+            alt="белыми буквами на латинице написано слово место."></a>    
     </header>
     <main>
         <section class="profile">
             <div class="profile__container">
-                <img class="profile__avatar" src="images/image.jpg" alt="аватар пользователя.">
+                <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="аватар пользователя.">
                 <div class="profile__info-edit">
                     <div class="profile__name-work-box">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -83,7 +83,9 @@
          </div>
     </div>
     </template>
-    <script src="script/script.js"></script>
+    <!-- <script src="./components/index.js"></script> -->
+    <script src="../dist/main.js"></script>
+    <!-- <script src="./main.js"></script> -->
 </body>
 
 
