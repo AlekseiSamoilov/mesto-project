@@ -1,10 +1,8 @@
-export const oldElements = document.querySelector('.elements__box');
-export const likeButton = document.querySelector('.grid-item__like-button');
 
 export const elementsBox = document.querySelector('.elements__box');
 export const newItemTitle = document.querySelector('#title');
 export const newItemImg = document.querySelector('#link');
-
+export const likeButton = document.querySelector('.grid-item__like-button');
 export const initialCards = [
     {
       name: 'Архыз',
@@ -35,6 +33,22 @@ export const initialCards = [
 import { closePopup } from "./modal";
 import { newItemPopup } from "./modal";
 
+
+// Добавление новой карточки
+export function addNewItem(evt) {
+    evt.preventDefault();
+    const title = newItemTitle.value;
+    const imgSrc = newItemImg.value;
+    const imgAlt = newItemTitle.value;
+    const card = createCard(title, imgSrc, imgAlt);
+    elementsBox.prepend(card);
+    evt.target.reset()
+    closePopup(newItemPopup);
+    // console.log('addNewItem called');
+    
+  }
+
+
 // Создание новой карточки
 export function createCard(title, imgSrc, imgAlt) {
   const newItems = document.querySelector('#add-new-item').content;
@@ -44,20 +58,7 @@ export function createCard(title, imgSrc, imgAlt) {
   newTitle.textContent = title;
   newImg.src = imgSrc;
   newImg.alt = imgAlt;
+  // console.log('createCard called');
   return newCard;
+  
 }
-
-// Добавление новой карточки
-export function addNewItem(evt) {
-    evt.preventDefault();
-    newItemTitle.getAttribute('value');
-    newItemImg.getAttribute('value');
-    const title = newItemTitle.value;
-    const imgSrc = newItemImg.value;
-    const imgAlt = newItemTitle.value;
-    const card = createCard(title, imgSrc, imgAlt);
-    oldElements.prepend(card);
-    evt.target.reset()
-    closePopup(newItemPopup);
-  }
-

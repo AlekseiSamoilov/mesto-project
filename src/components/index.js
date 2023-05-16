@@ -5,6 +5,7 @@ import { elementsBox } from './card'
 import { initialCards } from './card';
 import { createCard } from './card';
 import { addNewItem, newItemTitle, newItemImg, } from './card';
+import { likeButton } from './card';
 
 import {
     profilePopup,
@@ -28,18 +29,11 @@ import { editProfile } from './modal';
 import { closePopupOnEsc } from './modal';
 import { enableValidation } from './validate';
 import { formElement, newItemForm, formInput } from './validate';
+import { toggleButtonState } from './validate';
 
 // валидация формы редактирования
 enableValidation({
-    formSelector: '.edit-form', 
-    inputSelector: '.form__text',
-    submitButtonSelector: '.form__submit',
-    inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__input-error_active'
-  }); 
-//  валидация формы добавления нового эдемента
-  enableValidation({
-    formSelector: '.new-form', 
+    formSelector: '.form', 
     inputSelector: '.form__text',
     submitButtonSelector: '.form__submit',
     inputErrorClass: 'form__input_type_error',
@@ -60,6 +54,7 @@ elementsBox.addEventListener('click', (evt) => {
         evt.target.classList.toggle('grid-item__like-button_on');
     }
 });
+
 // удаление карточки
 elementsBox.addEventListener('click', (evt) => {
     const target = evt.target;
@@ -68,8 +63,6 @@ elementsBox.addEventListener('click', (evt) => {
         gridItem.remove();
     }
 });
-
-
 
 //   закрытие всех любого модального окна кликом по крестику
 closeButtons.forEach((button) => {
@@ -118,3 +111,9 @@ newItemForm.addEventListener('submit', addNewItem);
 
 closePopupOnEsc;
 
+  // деактивируем кнопку при 1й загрузке сайта
+//   toggleButtonState(inputList, submitButton, settings);
+
+  formElement.addEventListener('reset', () => {
+    disableButton(submitButton, settings)
+  });

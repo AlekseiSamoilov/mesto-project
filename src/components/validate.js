@@ -1,12 +1,13 @@
 
-export const formElement = document.querySelector('.form');
-export const newItemForm = document.querySelector('form[name="new-form"]');
+export const formElement = document.querySelector('.form'); // Это для поиска любой формы
 export const formInput = formElement.querySelector('.form__text');
-export const allowableSymbols = /^[A-Za-zА-Яа-яЁё\s-]+$/;
-export const errorMessages = {
-    invalidCharacters: 'Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы',
-};
+export const newItemForm = document.forms["new-form"]
 export const submitButton = formElement.querySelector('#submitButton');
+// export const allowableSymbols = /^[A-Za-zА-Яа-яЁё\s-]+$/;
+// export const errorMessages = {
+//     invalidCharacters: 'Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы',
+// };
+
 
 // функция добавление красного поля и ошибки
 export const showError = (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) => {
@@ -18,7 +19,7 @@ export const showError = (formElement, inputElement, errorMessage, { inputErrorC
     errorElement.classList.add(errorClass);
 };
 
-// // функция удаления красного поля и ошибки
+// функция удаления красного поля и ошибки
 export const hideError = (formElement, inputElement, { inputErrorClass, errorClass }) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     // inputElement.classList.remove('form__input_type_error');
@@ -29,31 +30,37 @@ export const hideError = (formElement, inputElement, { inputErrorClass, errorCla
 };
 
 // функция проверки валидации пустого поля, количества символов и допустимости символов
-
 export const checkInputValidity = (formElement, inputElement, other) => {
     if (!inputElement.validity.valid) {
-        showError(formElement, inputElement, inputElement.validationMessage, other);
-    } else if (inputElement.id !== 'link' && !allowableSymbols.test(inputElement.value)) {
-        showError(formElement, inputElement, errorMessages.invalidCharacters, other)
+        let errorMessage = '';
+        if (inputElement.id !== 'link' && inputElement.validity.patternMismatch) {
+            errorMessage = inputElement.dataset.errorWarning;
+        } else {
+            errorMessage = inputElement.validationMessage;
+        } 
+        showError(formElement, inputElement, errorMessage, other);
     } else {
         hideError(formElement, inputElement, other);
-    }
+    };
 };
+
 
 //   функция проверки невалидного ввода
 export const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
-        return !inputElement.validity.valid || inputElement.id !== 'link' && !allowableSymbols.test(inputElement.value);
-    })
-}
+        // return !inputElement.validity.valid || inputElement.id !== 'link' && !allowableSymbols.test(inputElement.value);
+        return !inputElement.validity.valid || inputElement.id !== 'link' && inputElement.validity.patternMismatch;
+    });
+};
 // функция отключения кнопки в случаи невалидного ввода
 export const toggleButtonState = (inputList, buttonElement) => {
-    if (hasInvalidInput(inputList)) {
-        buttonElement.disabled = true;
-    } else {
+    const validInput = inputList.every((inputElement) => inputElement.validity.valid);
+    if (validInput) {
         buttonElement.disabled = false;
-    }
-}
+    } else {
+        buttonElement.disabled = true;
+    };
+};
 
 //   функция установки слушателей на ввод
 export const setEventListeners = (formElement, { inputSelector, submitButtonSelector, ...other }) => {
@@ -61,6 +68,7 @@ export const setEventListeners = (formElement, { inputSelector, submitButtonSele
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
     // const buttonElement = formElement.querySelector('.form__submit');
     const buttonElement = formElement.querySelector(submitButtonSelector);
+    toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
             checkInputValidity(formElement, inputElement, other);
@@ -68,8 +76,9 @@ export const setEventListeners = (formElement, { inputSelector, submitButtonSele
         });
     });
 };
+  
 
-export const enableValidation = ({formSelector, ...other}) => {
+export const enableValidation = ({ formSelector, ...other }) => {
     const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach((formElement) => {
         formElement.addEventListener('submit', (evt) => {
@@ -78,5 +87,10 @@ export const enableValidation = ({formSelector, ...other}) => {
         setEventListeners(formElement, other);
     });
 };
+
+// export const disableButton = (buttonElement, disabled = true) => {
+//     buttonElement.disabled = disabled;
+//   };
+  
 
 

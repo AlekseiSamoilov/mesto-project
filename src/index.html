@@ -14,25 +14,43 @@
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="form edit-form" name="edit-form" method="post" action="#">
-                <input type="text" class="form__text" id="name" required minlength="2" maxlength="40" value="Жак-Ив Кусто">
+                <input type="text" class="form__text" id="name" 
+                required 
+                minlength="2" 
+                maxlength="40" 
+                pattern="^[A-Za-zА-Яа-яЁё\s-]+$"
+                data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                value="Жак-Ив Кусто">
                 <span class="form__input-error name-error"></span>
-                <input type="text" class="form__text" id="work" required minlength="2" maxlength="200" value="Исследователь океана">
+                <input type="text" class="form__text" id="work" 
+                required 
+                minlength="2" 
+                maxlength="200" 
+                value="Исследователь океана"
+                pattern="^[A-Za-zА-Яа-яЁё\s-]+$"
+                data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
                 <span class="form__input-error work-error"></span>
                 <button class="popup__save-button form__submit" id="submitButton" type="submit">Сохранить</button>
             </form>
         </div>
-        <!-- pattern="^[A-Za-zА-Яа-яЁё\s-]+$" -->
+        
     </section>
     <section class="popup new-item-popup"> <!--popup_opened  new-item-popup-->
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Новое место</h2>
             <form class="form new-form" name="new-form" method="post" action="#"> 
-                <input type="text" class="form__text" id="title" required minlength="2" maxlength="40"  placeholder="Название">
+                <input type="text" class="form__text" id="title" 
+                required 
+                minlength="2" 
+                maxlength="40" 
+                placeholder="Название"
+                pattern="^[A-Za-zА-Яа-яЁё\s-]+$"
+                data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
                 <span class="form__input-error title-error"></span>
                 <input type="url" class="form__text" id="link" required  placeholder="Ссылка на картинку">
                 <span class="form__input-error link-error"></span>
-                <button class="popup__save-button form__submit" type="submit">Создать</button>
+                <button class="popup__save-button form__submit" id="submitButton" type="submit">Создать</button>
             </form>
         </div>
     </section>
@@ -84,9 +102,8 @@
     </div>
     </template>
     <!-- <script src="./components/index.js"></script> -->
-    <script src="../dist/main.js"></script>
+    <!-- <script src="../dist/main.js"></script> -->
     <!-- <script src="./main.js"></script> -->
 </body>
-
 
 </html>

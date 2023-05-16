@@ -12,17 +12,20 @@ export const nameInput = document.querySelector('#name');
 export const jobInput = document.querySelector('#work');
 export const profileName = document.querySelector('.profile__name');
 export const profileWork = document.querySelector('.profile__work');
-
+import { newItemForm } from "./validate";
 
 //Функция закрытия любого попапа
 export function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closePopupOnEsc);
+    // document.removeEventListener('keydown', closePopupOnEsc);
   }
 
 // функция открытия любого попапа
 export function openPopup(popup) {
+    // const saveButton = newItemForm.querySelector('.form__submit');
+    // saveButton.disabled = true;
     popup.classList.add('popup_opened');
+    // console.log(saveButton);
     document.addEventListener('keydown', closePopupOnEsc);
   }
 
@@ -43,3 +46,5 @@ export function editProfile(evt) {
     profileWork.textContent = jobInput.value;
     closePopup(profilePopup);
   }
+
+  
