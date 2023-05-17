@@ -1,5 +1,5 @@
 
-export const formElement = document.querySelector('.form'); // Это для поиска любой формы
+export const formElement = document.querySelector('.form'); // Мне нужна эта переменная для поиска любой/всех формы
 export const formInput = formElement.querySelector('.form__text');
 export const newItemForm = document.forms["new-form"]
 export const submitButton = formElement.querySelector('#submitButton');
@@ -88,8 +88,8 @@ export const enableValidation = ({ formSelector, ...other }) => {
     });
 };
 
-// export const disableButton = (buttonElement, disabled = true) => {
-//     buttonElement.disabled = disabled;
+// export const disableButton = (buttonElement, settings) => { не очень понял как должна работать функция
+//     buttonElement.disabled = true;
 //   };
   
 

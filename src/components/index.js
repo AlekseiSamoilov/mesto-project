@@ -22,14 +22,14 @@ import {
     jobInput,
     profileName, 
     profileWork, 
+    popups
 } from './modal';
 import { closePopup } from './modal';
 import { openPopup } from './modal';
 import { editProfile } from './modal';
-import { closePopupOnEsc } from './modal';
 import { enableValidation } from './validate';
 import { formElement, newItemForm, formInput } from './validate';
-import { toggleButtonState } from './validate';
+// import { toggleButtonState } from './validate';
 
 // валидация формы редактирования
 enableValidation({
@@ -47,37 +47,19 @@ document.addEventListener('DOMContentLoaded', () => {
         elementsBox.prepend(newCard);
     });
 });
-// лайк карточки 
-elementsBox.addEventListener('click', (evt) => {
-    const target = evt.target;
-    if (target.classList.contains('grid-item__like-button')) {
-        evt.target.classList.toggle('grid-item__like-button_on');
-    }
-});
 
-// удаление карточки
-elementsBox.addEventListener('click', (evt) => {
-    const target = evt.target;
-    if (target.classList.contains('grid-item__trash')) {
-        const gridItem = target.closest('.grid-item');
-        gridItem.remove();
-    }
-});
+// закрытие любого попапа по клику на оверлей и клику по крестику и вправду клево 
 
-//   закрытие всех любого модального окна кликом по крестику
-closeButtons.forEach((button) => {
-    const popup = button.closest('.popup');
-    button.addEventListener('click', () => closePopup(popup));
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup);
+        };
+        if (evt.target.classList.contains('popup__close-button')) {
+            closePopup(popup);
+        };
+    });
 });
-
-// функция закрытия попаап по клику на оверлей 
-document.addEventListener('click', (evt) => {
-    const openedPopup = document.querySelector('.popup_opened');
-    if (openedPopup && evt.target.classList.contains('popup_opened')) {
-        closePopup(openedPopup);
-    }
-});
-
 
 // Открытие попапа добавления нового элемента
 addButton.addEventListener('click', () => {
@@ -89,31 +71,15 @@ editButton.addEventListener('click', () => {
     openPopup(profilePopup);
 });
 
-
-// Открытие попапа с картинкой
-elementsBox.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('grid-item__photo')) {
-        evt.preventDefault();
-        const imageLink = evt.target.src;
-        popupImage.src = imageLink;
-        const gridTitle = evt.target.closest('.grid-item').querySelector('.grid-item__title').textContent;
-        caption.textContent = gridTitle;
-        popupImage.alt = gridTitle;
-        openPopup(imagePopup);
-    }
-});
-
 //   редактирвоание информации профиля
 formElement.addEventListener('submit', editProfile);
 
 //  добавление новой карточки
 newItemForm.addEventListener('submit', addNewItem);
 
-closePopupOnEsc;
-
   // деактивируем кнопку при 1й загрузке сайта
 //   toggleButtonState(inputList, submitButton, settings);
 
-  formElement.addEventListener('reset', () => {
-    disableButton(submitButton, settings)
-  });
+//   formElement.addEventListener('reset', () => {
+//     disableButton(submitButton, settings)
+//   });
