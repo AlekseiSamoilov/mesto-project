@@ -1,0 +1,12 @@
+.profile__avatar-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .profile__avatar-container:hover .profile__avatar-overlay {
+    opacity: 1;
+  }
+
+  .profile__avatar-container:hover .profile__avatar-edit-icon {
+    opacity: 1;
+  }

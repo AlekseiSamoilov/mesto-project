@@ -33,7 +33,10 @@
 @import url(../blocks/profile/__work/profile__work.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
-/*---------elements-------------*/
+@import url(../blocks/profile/__avatar-container/profile__avatar-container.css);
+/* @import url(../blocks/profile/__avatar-overlay/profile__avatar-overlay.css);
+@import url(../blocks/profile/__avatar-edit-icon/profile__avatar-edit-icon.css);
+---------elements------------- */
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__box/elements__box.css);
 /*---------grid-item-------------*/
@@ -44,6 +47,8 @@
 @import url(../blocks/grid-item/__like-button/grid-item__like-button.css);
 @import url(../blocks/grid-item/__like-button/_on/grid-item__like-button_on.css);
 @import url(../blocks/grid-item/__trash/grid-item__trash.css);
+@import url(../blocks/grid-item/__like-box/grid-item__like-box.css);
+@import url(../blocks/grid-item/__likes-number/grid-item__likes-number.css);
 /*---------footer-------------*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__box/footer__box.css);

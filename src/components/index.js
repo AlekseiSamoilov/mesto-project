@@ -4,41 +4,25 @@ import '../pages/index.css';
 import { elementsBox } from './card'
 import { initialCards } from './card';
 import { createCard } from './card';
-import { addNewItem, newItemTitle, newItemImg, } from './card';
-import { likeButton } from './card';
-
-import {
-    profilePopup,
-    newItemPopup,
-    imagePopup,
-    editButton,
-    popupOpened,
-    openButtons,
-    addButton,
-    popupImage,
-    caption,
-    closeButtons,
-    nameInput,
-    jobInput,
-    profileName, 
-    profileWork, 
-    popups
-} from './modal';
+import { addNewItem } from './card';
+import { profilePopup, newItemPopup, editButton, addButton, popups } from './modal';
 import { closePopup } from './modal';
 import { openPopup } from './modal';
 import { editProfile } from './modal';
 import { enableValidation } from './validate';
-import { formElement, newItemForm, formInput } from './validate';
-// import { toggleButtonState } from './validate';
+import { profileForm, newItemForm } from './modal';
+
+// import { disableButton } from './validate';
+// import { submitButton } from './modal';
 
 // валидация формы редактирования
 enableValidation({
-    formSelector: '.form', 
+    formSelector: '.form',
     inputSelector: '.form__text',
     submitButtonSelector: '.form__submit',
     inputErrorClass: 'form__input_type_error',
     errorClass: 'form__input-error_active'
-  }); 
+});
 
 // Добавление первых шести карточек при загрузки страницы
 document.addEventListener('DOMContentLoaded', () => {
@@ -72,7 +56,7 @@ editButton.addEventListener('click', () => {
 });
 
 //   редактирвоание информации профиля
-formElement.addEventListener('submit', editProfile);
+profileForm.addEventListener('submit', editProfile);
 
 //  добавление новой карточки
 newItemForm.addEventListener('submit', addNewItem);

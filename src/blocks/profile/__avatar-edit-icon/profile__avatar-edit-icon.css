@@ -1,0 +1,11 @@
+.profile__avatar-edit-icon {
+    width: 26px; 
+    height: 26px;
+    background-image: url(../../../images/editUserPhoto.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 3;
+  }

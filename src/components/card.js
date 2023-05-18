@@ -2,7 +2,7 @@
 export const elementsBox = document.querySelector('.elements__box');
 export const newItemTitle = document.querySelector('#title');
 export const newItemImg = document.querySelector('#link');
-// export const likeButton = document.querySelector('.grid-item__like-button');
+export const submitNewItem = newItemForm.querySelector('.form__submit');
 export const initialCards = [
   {
     name: 'Архыз',
@@ -36,6 +36,7 @@ import { popupImage } from "./modal";
 import { caption } from "./modal";
 import { openPopup } from "./modal";
 import { imagePopup } from "./modal";
+import { newItemForm } from "./modal";
 
 // Добавление новой карточки
 export function addNewItem(evt) {
@@ -46,6 +47,7 @@ export function addNewItem(evt) {
   const card = createCard(title, imgSrc, imgAlt);
   elementsBox.prepend(card);
   evt.target.reset()
+  submitNewItem.disabled = true;
   closePopup(newItemPopup);
 }
 
