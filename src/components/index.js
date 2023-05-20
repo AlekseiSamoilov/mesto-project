@@ -1,19 +1,18 @@
 //  импорт стилей
 import '../pages/index.css';
 //  импорт карточек
-import { elementsBox } from './card'
-import { initialCards } from './card';
-import { createCard } from './card';
 import { addNewItem } from './card';
-import { profilePopup, newItemPopup, editButton, addButton, popups } from './modal';
+import { profilePopup, newItemPopup, editButton, addButton, popups, userInfo, avatarContainer } from './modal';
 import { closePopup } from './modal';
 import { openPopup } from './modal';
 import { editProfile } from './modal';
 import { enableValidation } from './validate';
 import { profileForm, newItemForm } from './modal';
+import { loadCards } from './card';
+import { avatarPopup } from './modal';
+import { editAvatar } from './modal';
+import { avatarForm } from './modal';
 
-// import { disableButton } from './validate';
-// import { submitButton } from './modal';
 
 // валидация формы редактирования
 enableValidation({
@@ -24,16 +23,13 @@ enableValidation({
     errorClass: 'form__input-error_active'
 });
 
-// Добавление первых шести карточек при загрузки страницы
-document.addEventListener('DOMContentLoaded', () => {
-    initialCards.forEach((card) => {
-        const newCard = createCard(card.name, card.link, card.name);
-        elementsBox.prepend(newCard);
-    });
-});
+// Загрузка карточек
+document.addEventListener('DOMContentLoaded', loadCards);
 
-// закрытие любого попапа по клику на оверлей и клику по крестику и вправду клево 
+// Загрузка информации о пользователе
+document.addEventListener('DOMContentLoaded', userInfo);
 
+// закрытие любого попапа по клику на оверлей и клику по крестику
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains('popup_opened')) {
@@ -44,7 +40,10 @@ popups.forEach((popup) => {
         };
     });
 });
-
+// Открытие попапа редактирования аватара
+avatarContainer.addEventListener('click', () => {
+    openPopup(avatarPopup);
+})
 // Открытие попапа добавления нового элемента
 addButton.addEventListener('click', () => {
     openPopup(newItemPopup);
@@ -61,9 +60,5 @@ profileForm.addEventListener('submit', editProfile);
 //  добавление новой карточки
 newItemForm.addEventListener('submit', addNewItem);
 
-  // деактивируем кнопку при 1й загрузке сайта
-//   toggleButtonState(inputList, submitButton, settings);
-
-//   formElement.addEventListener('reset', () => {
-//     disableButton(submitButton, settings)
-//   });
+//  Смена аватара
+avatarForm.addEventListener('submit', editAvatar);

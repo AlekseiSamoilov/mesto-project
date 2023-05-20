@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="pages/index.css"> -->
     <title>Mesto</title>
 </head>
 
 <body class="page">
-    <section class="popup profile-popup"> <!-- popup_opened  profile-popup-->
+    <section class="popup profile-popup "> <!-- popup_opened  profile-popup-->
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -17,10 +16,10 @@
                 <input type="text" class="form__text" id="name" required minlength="2" maxlength="40"
                     pattern="^[A-Za-zА-Яа-яЁё\s-]+$"
                     data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
-                    value="Жак-Ив Кусто">
+                    value="">
                 <span class="form__input-error name-error"></span>
                 <input type="text" class="form__text" id="work" required minlength="2" maxlength="200"
-                    value="Исследователь океана" pattern="^[A-Za-zА-Яа-яЁё\s-]+$"
+                    value="" pattern="^[A-Za-zА-Яа-яЁё,.\s-]+$"
                     data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
                 <span class="form__input-error work-error"></span>
                 <button class="popup__save-button form__submit" id="submitButton" type="submit">Сохранить</button>
@@ -35,12 +34,29 @@
             <form class="form new-form" name="new-form" method="post" action="#">
                 <input type="text" class="form__text" id="title" required minlength="2" maxlength="40"
                     placeholder="Название" pattern="^[A-Za-zА-Яа-яЁё\s-]+$"
-                    data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+                    data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" value="">
                 <span class="form__input-error title-error"></span>
-                <input type="url" class="form__text" id="link" required placeholder="Ссылка на картинку">
+                <input type="url" class="form__text" id="link" required placeholder="Ссылка на картинку" value="">
                 <span class="form__input-error link-error"></span>
                 <button class="popup__save-button form__submit" id="submitButton" type="submit">Создать</button>
             </form>
+        </div>
+    </section>
+    <section class="popup edit-avatar-popup">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form class="form change-avatar-form" name="change-avatar-form" method="post" action="#">
+                <input type="url" required class="form__text" id="avatar">
+                <span class="form__input-error avatar-error"></span>
+                <button class="popup__save-button form__submit" id="submitButton" type="submit">Сохранить</button>
+        </div>
+    </section>
+    <section class="popup confirm-delete-item">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__title">Вы уверены?</h2>
+                <button class="popup__save-button form__submit" id="submitButton" type="submit">Да</button>
         </div>
     </section>
     <section class="popup popup__image-popup"> <!--popup_opened  popup__image-popup-->
@@ -90,16 +106,13 @@
             <img class="grid-item__photo" src=" " alt="фото места">
             <div class="grid-item__reaction">
                 <h2 class="grid-item__title"></h2>
-                <!-- <div class="grid-item__like-box"> -->
+                <div class="grid-item__like-box">
                 <button class="grid-item__like-button" type="button"></button>
-                <!-- <p class="grid-item__likes-number">2</p>
-            </div> -->
+                <p class="grid-item__likes-number">2</p>
+            </div>
             </div>
         </div>
     </template>
-    <!-- <script src="./components/index.js"></script> -->
-    <!-- <script src="../dist/main.js"></script> -->
-    <!-- <script src="./main.js"></script> -->
 </body>
 
 </html>
