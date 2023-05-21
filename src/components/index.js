@@ -2,18 +2,17 @@
 import '../pages/index.css';
 //  импорт карточек
 import { addNewItem } from './card';
-import { profilePopup, newItemPopup, editButton, addButton, popups, userInfo, avatarContainer } from './modal';
+import { profilePopup, newItemPopup, editButton, addButton, popups, avatarContainer } from './modal';
 import { closePopup } from './modal';
 import { openPopup } from './modal';
 import { editProfile } from './modal';
 import { enableValidation } from './validate';
 import { profileForm, newItemForm } from './modal';
-import { loadCards } from './card';
 import { avatarPopup } from './modal';
 import { editAvatar } from './modal';
 import { avatarForm } from './modal';
-
-
+import { loadCards, user } from './api';
+import { userInfo } from './api';
 // валидация формы редактирования
 enableValidation({
     formSelector: '.form',

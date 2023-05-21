@@ -22,6 +22,9 @@ export const profileAvatar = document.querySelector('.profile__avatar');
 export const avatarInput = document.querySelector('#avatar')
 export const avatarContainer = document.querySelector('.profile__avatar-container');
 
+import { sendUserInfo } from "./api";
+import { sendUserAvatar } from "./api";
+
 //Функция закрытия любого попапа
 export function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -58,67 +61,8 @@ closePopup(avatarPopup);
 sendUserAvatar();
 }
 
-export function userInfo () {
-  fetch('https://nomoreparties.co/v1/plus-cohort-24/users/me', {
-  headers: {
-    authorization: 'db4d1547-9568-4148-b7c3-464a940a5c5b'
-  }
-})
-.then(res => res.json())
-.then(user => {
-  console.log(user);
-  profileName.textContent = user.name;
-  profileWork.textContent = user.about;
-  nameInput.value = user.name;
-  jobInput.value = user.about
-  profileAvatar.src = user.avatar;
-  avatarInput.value = user.avatar;
-})
-.catch(error => {
-  console.log('Ошибка загрузки', error);
-});
-};
 
-// Сохранение на сервере информации о поьзователе
-export function sendUserInfo () {
-  fetch('https://nomoreparties.co/v1/plus-cohort-24/users/me', {
-    method: 'PATCH',
-    headers: {
-    authorization: 'db4d1547-9568-4148-b7c3-464a940a5c5b',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: nameInput.value,
-    about: jobInput.value,
-  })
-})
-.then(res => res.json())
-.then(user => {
-  console.log(user);
-})
-.catch(error => {
-  console.log('Ошибка обновления данных', error);
-});
-};
 
-// Сохранение на сервере зменения аватара
-export function sendUserAvatar () {
-  fetch('https://nomoreparties.co/v1/plus-cohort-24/users/me/avatar', {
-    method: 'PATCH',
-    headers: {
-    authorization: 'db4d1547-9568-4148-b7c3-464a940a5c5b',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    avatar: avatarInput.value,
-  })
-})
-.then(res => res.json())
-.then(user => {
-  console.log(user);
-})
-.catch(error => {
-  console.log('Ошибка обновления данных', error);
-});
-};
+
+
 

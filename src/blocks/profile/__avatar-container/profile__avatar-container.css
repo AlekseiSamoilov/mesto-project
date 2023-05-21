@@ -17,12 +17,6 @@
   background-color: rgba(0, 0, 0, 0.8); 
   background-repeat: no-repeat;
   background-position: center;
+  /* margin-top: 40px; */
 }
 
-  /* .profile__avatar-container:hover .profile__avatar-overlay {
-    opacity: 1;
-  }
-
-  .profile__avatar-container:hover .profile__avatar-edit-icon {
-    opacity: 1;
-  } */
