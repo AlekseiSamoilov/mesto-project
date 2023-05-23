@@ -35,7 +35,6 @@ export const loadCards = () => {
     userInfo()
       .then(user => {
         cards.forEach(card => {
-          // const isLikedByCurrentUser = card.likes.includes(user._id);
           const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, user, card._id);
           elementsBox.prepend(newCard);
         });
@@ -113,10 +112,10 @@ export function sendUserInfo () {
   .then(res => { 
     if (res.ok) 
     {
-    return res.json()}
-    return Promise.reject(`Ошбика: ${res.status}`);
+    return res.json()
+  }
+  return Promise.reject(`Ошбика: ${res.status}`);
   })
-
   .catch(error => {
     console.log(error);
   });
@@ -124,7 +123,7 @@ export function sendUserInfo () {
 
   // Сохранение на сервере изменения аватара
 export function sendUserAvatar () {
-    fetch(`${config.baseUrl}/users/me/avatar`, {
+    return fetch(`${config.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: config.headers,
     body: JSON.stringify({

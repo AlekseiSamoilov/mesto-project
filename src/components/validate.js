@@ -83,9 +83,6 @@ export const enableValidation = ({ formSelector, ...other }) => {
     });
 };
 
-// export const disableButton = (buttonElement) => {
-//     buttonElement.disabled = true;
-//   };
 
 
 

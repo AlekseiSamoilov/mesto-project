@@ -3,6 +3,8 @@ export const elementsBox = document.querySelector('.elements__box');
 export const newItemTitle = document.querySelector('#title');
 export const newItemImg = document.querySelector('#link');
 export const submitNewItem = newItemForm.querySelector('.form__submit');
+export const deletePopup = document.querySelector('.confirm-delete-item');
+export const yesDelete = deletePopup.querySelector('.form-delete');
 
 import { closePopup } from "./modal";
 import { newItemPopup } from "./modal";
@@ -17,9 +19,22 @@ import { deleteCardFromServer } from "./api";
 import { addLikeToServer } from "./api";
 import { deleteLikeFromServer } from "./api";
 
+let confirmDeleteCallback = null;
+yesDelete.addEventListener('click', () => {
+  confirmDeleteCallback();
+  closePopup(deletePopup);
+});
+
+export function confirmDelete (callback) {
+  confirmDeleteCallback = callback
+  openPopup(deletePopup);
+}
+
 // Добавление новой карточки
 export function addNewItem(evt) {
   evt.preventDefault();
+  const firstButtonText = submitNewItem.textContent;
+  submitNewItem.textContent = 'Сохранение...';
   userInfo()
     .then(user => {
       const title = newItemTitle.value;
@@ -29,11 +44,13 @@ export function addNewItem(evt) {
           const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, user, card._id);
           elementsBox.prepend(newCard);
           evt.target.reset();
+          submitNewItem.textContent = firstButtonText;
           submitNewItem.disabled = true;
           closePopup(newItemPopup);
         })
         .catch(error => {
           console.log( error);
+          submitNewItem.textContent = firstButtonText;
         });
     })
     .catch(error => {
@@ -75,10 +92,6 @@ export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
     } 
   });
 
-
-
-
-
   const trashButton = newCard.querySelector('.grid-item__trash');
   if (owner === user._id) { 
     trashButton.style.display = 'block';
@@ -87,14 +100,17 @@ export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
   }
 
   trashButton.addEventListener('click', () => {
+    confirmDelete(() => {
     const cardId = newCard.dataset.id
     deleteCardFromServer(cardId)
     .then(() => {
       newCard.remove();
     })
-.catch(error => {
-  console.log(error);
-});
+    .catch(error => {
+      console.log(error);
+    });
+    closePopup(deletePopup)
+  });
   });
 
   newImg.addEventListener('click', (evt) => {

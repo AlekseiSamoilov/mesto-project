@@ -21,7 +21,8 @@ export const submitButton = document.querySelector('#submitButton');
 export const profileAvatar = document.querySelector('.profile__avatar');
 export const avatarInput = document.querySelector('#avatar')
 export const avatarContainer = document.querySelector('.profile__avatar-container');
-
+export const submitUserInfo = document.querySelector('.submit-info');
+export const submitAvatar = document.querySelector('.submit-avatar');
 import { sendUserInfo } from "./api";
 import { sendUserAvatar } from "./api";
 
@@ -48,18 +49,38 @@ export const closePopupOnEsc = (evt) => {
 // Функция редактирования информации в профиле
 export function editProfile(evt) {
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileWork.textContent = jobInput.value;
-  closePopup(profilePopup);
-  sendUserInfo();
-}
+  const firstButtonText = submitUserInfo.textContent;
+  submitUserInfo.textContent = 'Сохранение...';
+  sendUserInfo()
+    .then((userInfo) => {
+      profileName.textContent = userInfo.name;
+      profileWork.textContent = userInfo.about;
+      submitUserInfo.textContent = firstButtonText;
+      closePopup(profilePopup);
+    })
+    .catch((error) => {
+      console.log(error);
+      submitUserInfo.textContent = firstButtonText;
+    });
+};
+
+
 // Функция редактирования аватара
 export function editAvatar(evt) {
 evt.preventDefault();
-profileAvatar.src = avatar.value;
-closePopup(avatarPopup);
-sendUserAvatar();
-}
+const firstButtonText = submitAvatar.textContent;
+submitAvatar.textContent = 'Сохранение...';
+sendUserAvatar()
+.then ((userAvatar) => {
+  profileAvatar.src = userAvatar.avatar;
+  submitAvatar.textContent = firstButtonText;
+  closePopup(avatarPopup);
+})
+.catch((error) => {
+  console.log(error);
+  submitAvatar.textContent = firstButtonText;
+});
+};
 
 
 
