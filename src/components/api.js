@@ -9,16 +9,26 @@ import { jobInput } from './modal';
 import { profileAvatar } from './modal';
 import { avatarInput } from './modal';
 
-const config = {
-    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-24',
+// конфиг из 24 когорты
+// const config = {
+//     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-24',
+//     headers: {
+//       authorization: 'db4d1547-9568-4148-b7c3-464a940a5c5b',
+//       'Content-Type': 'application/json'
+//     }
+//   }
+
+// конфиг из 25 когорты
+  const config = {
+    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
     headers: {
-      authorization: 'db4d1547-9568-4148-b7c3-464a940a5c5b',
+      authorization: 'af2c4d49-40c6-44a3-a4f7-8cf5a2190518',
       'Content-Type': 'application/json'
     }
   }
-export const user = {
-    _id: 'f78fde13bb4fac52ab6254c4'
-};
+// export const user = {
+//     _id: 'f78fde13bb4fac52ab6254c4'
+// };
 
 //   загрузка карточек при загрузки страницы
 export const loadCards = () => {

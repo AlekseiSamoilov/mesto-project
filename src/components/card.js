@@ -19,24 +19,14 @@ import { deleteCardFromServer } from "./api";
 import { addLikeToServer } from "./api";
 import { deleteLikeFromServer } from "./api";
 
-let confirmDeleteCallback = null;
-yesDelete.addEventListener('click', () => {
-  confirmDeleteCallback();
-  closePopup(deletePopup);
-});
-
-export function confirmDelete (callback) {
-  confirmDeleteCallback = callback
-  openPopup(deletePopup);
-}
 
 // Добавление новой карточки
 export function addNewItem(evt) {
-  evt.preventDefault();
-  const firstButtonText = submitNewItem.textContent;
-  submitNewItem.textContent = 'Сохранение...';
-  userInfo()
-    .then(user => {
+  evt.preventDefault(); // отменили стандартное действие формы
+  const firstButtonText = submitNewItem.textContent; // сохранили в этой переменной первоначальный текст на кнопке, что бы потом возвратить как было
+  submitNewItem.textContent = 'Сохранение...'; // присвоили тексту на кнопке новое значение
+  userInfo() // загрузка данных пользователя
+    .then(user => { 
       const title = newItemTitle.value;
       const imgSrc = newItemImg.value;
       sendNewCard(title, imgSrc)
@@ -58,6 +48,21 @@ export function addNewItem(evt) {
     });
 }
 
+// пустая переменная, в ней будет сохранена функция удаления до момента подтверждения
+let deleteCallback = null;
+
+// слушатель на кнопке "Да" в попапе подтверждения удаления
+yesDelete.addEventListener('click', () => {
+  deleteCallback();
+  closePopup(deletePopup);
+});
+
+// функция удаления карточки
+export function confirmDelete (callback) {
+  deleteCallback = callback
+  openPopup(deletePopup);
+}
+
 // Создание новой карточки
 export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
   const newItems = document.querySelector('#add-new-item').content;
@@ -71,7 +76,7 @@ export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
   newImg.alt = imgAlt;
   likeNumber.textContent = likes;
   newCard.dataset.id = cardId;
-
+// постанвока лайков на карточках
   const likeButton = newCard.querySelector('.grid-item__like-button');
   likeButton.addEventListener('click', () => {
     const wasLiked = likeButton.classList.contains('grid-item__like-button_on');
@@ -91,14 +96,13 @@ export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
       .catch(error => console.error(error));
     } 
   });
-
+// удаления карточки
   const trashButton = newCard.querySelector('.grid-item__trash');
   if (owner === user._id) { 
     trashButton.style.display = 'block';
   } else {
     trashButton.style.display = 'none';
   }
-
   trashButton.addEventListener('click', () => {
     confirmDelete(() => {
     const cardId = newCard.dataset.id
@@ -112,7 +116,7 @@ export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
     closePopup(deletePopup)
   });
   });
-
+// открытие попапа с картинкой
   newImg.addEventListener('click', (evt) => {
     evt.preventDefault();
     const imageLink = newImg.src;
