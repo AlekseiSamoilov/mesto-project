@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+<script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+
+<body class="page">
+    <section class="popup profile-popup "> <!-- popup_opened  profile-popup-->
+        <div class="popup__container">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class="form edit-form" name="edit-form" method="post" action="#">
+                <input type="text" class="form__text" id="name" required minlength="2" maxlength="40"
+                    pattern="^[A-Za-zА-Яа-яЁё\s-]+$"
+                    data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                    value="">
+                <span class="form__input-error name-error"></span>
+                <input type="text" class="form__text" id="work" required minlength="2" maxlength="200"
+                    value="" pattern="^[A-Za-zА-Яа-яЁё,.\s-]+$"
+                    data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+                <span class="form__input-error work-error"></span>
+                <button class="popup__save-button form__submit submit-info" id="submitButton" type="submit">Сохранить</button>
+            </form>
+        </div>
+
+    </section>
+    <section class="popup new-item-popup"> <!--popup_opened  new-item-popup-->
+        <div class="popup__container">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="form new-form" name="new-form" method="post" action="#">
+                <input type="text" class="form__text" id="title" required minlength="2" maxlength="40"
+                    placeholder="Название" pattern="^[A-Za-zА-Яа-яЁё\s-]+$"
+                    data-error-warning="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" value="">
+                <span class="form__input-error title-error"></span>
+                <input type="url" class="form__text" id="link" required placeholder="Ссылка на картинку" value="">
+                <span class="form__input-error link-error"></span>
+                <button class="popup__save-button form__submit submit-new-item" id="submitButton" type="submit">Создать</button>
+            </form>
+        </div>
+    </section>
+    <section class="popup edit-avatar-popup">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form class="form change-avatar-form" name="change-avatar-form" method="post" action="#">
+                <input type="url" required class="form__text" id="avatar">
+                <span class="form__input-error avatar-error"></span>
+                <button class="popup__save-button form__submit submit-avatar" id="submitButton" type="submit">Сохранить</button>
+        </div>
+    </section>
+    <section class="popup confirm-delete-item">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__title">Вы уверены?</h2>
+                <button class="popup__save-button form__submit form-delete" id="submitButton" type="submit">Да</button>
+        </div>
+    </section>
+    <section class="popup popup__image-popup"> <!--popup_opened  popup__image-popup-->
+        <figure class="popup__image-container"> <!--image-popup__container-->
+            <button class="popup__close-button"></button>
+            <img class="popup__image-pic" src='' alt=""> <!--image-popup__pic-->
+            <figcaption class="popup__image-caption"></figcaption> <!--image-popup__caption-->
+        </figure>
+    </section>
+
+    <header aria-label="header" class="header">
+        <a href="#"><img class="header__logo" src="1f1e95914acec5e33236.svg"
+                alt="белыми буквами на латинице написано слово место."></a>
+    </header>
+    <main>
+        <section class="profile">
+            <div class="profile__container">
+                <div class="profile__avatar-container">
+                    <img class="profile__avatar" src="a696d637fa0fe0a07e4c.jpg" alt="аватар пользователя.">
+                    <div class="profile__avatar-overlay">
+                        <i class="profile__avatar-edit-icon"></i>
+                    </div>
+                </div>
+                <div class="profile__info-edit">
+                    <div class="profile__name-work-box">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button open-button" type="button"></button>
+                    </div>
+
+                    <p class="profile__work">Исследователь океана</p>
+                </div>
+            </div>
+            <button class="profile__add-button open-button" type="button"></button>
+        </section>
+        <section class="elements">
+            <div class="elements__box">
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer__box">
+            <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+        </div>
+    </footer>
+    <template id="add-new-item">
+        <div class="grid-item">
+            <button class="grid-item__trash"></button>
+            <img class="grid-item__photo" src=" " alt="фото места">
+            <div class="grid-item__reaction">
+                <h2 class="grid-item__title"></h2>
+                <div class="grid-item__like-box">
+                <button class="grid-item__like-button" type="button"></button>
+                <p class="grid-item__likes-number">2</p>
+            </div>
+            </div>
+        </div>
+    </template>
+</body>
+
+</html>
