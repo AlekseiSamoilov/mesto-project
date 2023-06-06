@@ -1,13 +1,4 @@
-import { createCard } from './card';
-import { elementsBox } from './card';
-import { newItemTitle } from './card';
-import { newItemImg } from './card';
-import { profileName } from './modal';
-import { profileWork } from './modal';
-import { nameInput } from './modal';
-import { jobInput } from './modal';
-import { profileAvatar } from './modal';
-import { avatarInput } from './modal';
+
 
 // конфиг из 24 когорты
 // const config = {
@@ -26,36 +17,33 @@ import { avatarInput } from './modal';
       'Content-Type': 'application/json'
     }
   }
-// export const user = {
-//     _id: 'f78fde13bb4fac52ab6254c4'
-// };
 
-//   загрузка карточек при загрузки страницы
+
+function getResponseData(res) {
+  if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`); 
+  }
+  return res.json();
+}
+
+  // загрузка карточек при загрузки страницы
 export const loadCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
-  .then(res => { 
-    if (res.ok) { 
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then(cards => {
-    userInfo()
-      .then(user => {
-        cards.forEach(card => {
-          const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, user, card._id);
-          elementsBox.prepend(newCard);
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  })
-  .catch(error => {
-    console.log(error);
-  });
+  .then(getResponseData);
+  // .then(cards => {
+  //   userInfo()
+  //     .then(user => {
+  //       cards.forEach(card => {
+  //         const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, user, card._id);
+  //         elementsBox.prepend(newCard);
+  //       });
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // })
 };
 
 
@@ -69,18 +57,7 @@ export function sendNewCard (title, imgSrc) {
       link: imgSrc,
     })
   })
-  .then(res => { if (res.ok) {
-    return res.json(); 
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
-})
-.then(data => {
-  console.log(data);
-  return data;
-})
-  .catch(error => {
-    console.log(error);
-  });
+  .then(getResponseData)
   };
 
   // Загрузка информации о пользователе с сервера
@@ -88,68 +65,43 @@ export function sendNewCard (title, imgSrc) {
     return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
   })
-  .then(res => { 
-    if (res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then(user => {
-    profileName.textContent = user.name;
-    profileWork.textContent = user.about;
-    nameInput.value = user.name;
-    jobInput.value = user.about;
-    profileAvatar.src = user.avatar;
-    avatarInput.value = user.avatar;
-    return user;
-  })
-  .catch(error => {
-    console.log(error); 
-  });
+  .then(getResponseData)
+  // .then(user => {
+  //   profileName.textContent = user.name;
+  //   profileWork.textContent = user.about;
+  //   nameInput.value = user.name;
+  //   jobInput.value = user.about;
+  //   profileAvatar.src = user.avatar;
+  //   avatarInput.value = user.avatar;
+  //   return user;
+  // })
 };
 
 
   // Сохранение на сервере информации о поьзователе
-export function sendUserInfo () {
+export function sendUserInfo (name, about) {
     return fetch(`${config.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: config.headers,
     body: JSON.stringify({
-      name: nameInput.value,
-      about: jobInput.value,
+      name: name,
+      about: about,
     })
   })
-  .then(res => { 
-    if (res.ok) 
-    {
-    return res.json()
-  }
-  return Promise.reject(`Ошбика: ${res.status}`);
-  })
-  .catch(error => {
-    console.log(error);
-  });
+  .then(getResponseData)
   };
 
   // Сохранение на сервере изменения аватара
-export function sendUserAvatar () {
+export function sendUserAvatar (avatar) {
     return fetch(`${config.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: config.headers,
     body: JSON.stringify({
-      avatar: avatarInput.value,
+      // avatar: avatarInput.value,
+      avatar: avatar,
     })
   })
-  .then(res => {
-     if (res.ok)
-      {
-    return res.json()
-  }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .catch(error => {
-    console.log(error);
-  });
+  .then(getResponseData)
   };
 
   // удаление карточки с сервера 
@@ -158,15 +110,7 @@ return fetch (`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .catch(error => {
-    console.log(error);
-  });
+  .then(getResponseData)
 }
 
 // поставили лайк на сервере
@@ -175,29 +119,14 @@ export const addLikeToServer = (cardId) => {
     method: 'PUT',
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json()
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .catch(error => {
-    console.log(error);
-  })
+  .then(getResponseData)
 }
+
 // Удаление лайка с сервера
 export const deleteLikeFromServer = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json()
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .catch(error => {
-    console.log(error);
-  })
+  .then(getResponseData)
 }

@@ -49,14 +49,38 @@ export const hasInvalidInput = (inputList) => {
 };
 
 // функция отключения кнопки в случаи невалидного ввода
+// export const toggleButtonState = (inputList, buttonElement) => {
+//     const validInput = inputList.every((inputElement) => inputElement.validity.valid);
+//     if (validInput) {
+//         buttonElement.disabled = false;
+//     } else {
+//         buttonElement.disabled = true;
+//     };
+// };
 export const toggleButtonState = (inputList, buttonElement) => {
-    const validInput = inputList.every((inputElement) => inputElement.validity.valid);
+    if (!Array.isArray(inputList)) {
+        throw new Error('inputList must be an array');
+    }
+
+    const validInput = inputList.every((inputElement) => {
+        if (typeof inputElement !== 'object' || inputElement === null) {
+            throw new Error('Each inputElement must be an object');
+        }
+
+        if (typeof inputElement.validity !== 'object' || inputElement.validity === null) {
+            throw new Error('Each inputElement must have a validity object');
+        }
+
+        return inputElement.validity.valid;
+    });
+
     if (validInput) {
         buttonElement.disabled = false;
     } else {
         buttonElement.disabled = true;
     };
 };
+
 
 //   функция установки слушателей на ввод
 export const setEventListeners = (formElement, { inputSelector, submitButtonSelector, ...other }) => {

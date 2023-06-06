@@ -13,6 +13,24 @@ import { editAvatar } from './modal';
 import { avatarForm } from './modal';
 import { loadCards, user } from './api';
 import { userInfo } from './api';
+import { profileName } from './modal';
+import { profileWork } from './modal';
+import { nameInput } from './modal';
+import { jobInput } from './modal';
+import { profileAvatar } from './modal';
+import { avatarInput } from './modal';
+export let loadedUser;
+
+Promise.all([
+    userInfo(),
+    loadCards()
+])
+    .then(([userInfoData, cardsData]) => {
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+
 // валидация формы редактирования
 enableValidation({
     formSelector: '.form',
@@ -26,7 +44,7 @@ enableValidation({
 document.addEventListener('DOMContentLoaded', loadCards);
 
 // Загрузка информации о пользователе
-document.addEventListener('DOMContentLoaded', userInfo);
+// document.addEventListener('DOMContentLoaded', userInfo);
 
 // закрытие любого попапа по клику на оверлей и клику по крестику
 popups.forEach((popup) => {
@@ -39,6 +57,33 @@ popups.forEach((popup) => {
         };
     });
 });
+
+// вызов функций связаных с пользователем
+
+userInfo()
+  .then((data) => {
+    loadedUser = data;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+  userInfo () 
+  .then(user => {
+    profileName.textContent = user.name;
+    profileWork.textContent = user.about;
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileWork.textContent;
+    profileAvatar.src = user.avatar;
+    avatarInput.value = user.avatar;
+
+    return user;
+  })
+  .catch(error => {
+    console.log(error); 
+  });
+
+
 // Открытие попапа редактирования аватара
 avatarContainer.addEventListener('click', () => {
     openPopup(avatarPopup);

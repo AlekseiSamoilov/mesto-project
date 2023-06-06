@@ -26,6 +26,7 @@ export const submitAvatar = document.querySelector('.submit-avatar');
 import { sendUserInfo } from "./api";
 import { sendUserAvatar } from "./api";
 
+
 //Функция закрытия любого попапа
 export function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -51,15 +52,24 @@ export function editProfile(evt) {
   evt.preventDefault();
   const firstButtonText = submitUserInfo.textContent;
   submitUserInfo.textContent = 'Сохранение...';
-  sendUserInfo()
-    .then((userInfo) => {
-      profileName.textContent = userInfo.name;
-      profileWork.textContent = userInfo.about;
-      submitUserInfo.textContent = firstButtonText;
+
+  // let name = nameInput.value;
+  // let about = jobInput.value;
+  
+  sendUserInfo(nameInput.value, jobInput.value)
+    .then((user) => {
+      // profileName.textContent = name;
+      // profileWork.textContent = about;
+      profileName.textContent = user.name;
+      profileWork.textContent = user.about;
+      // submitUserInfo.textContent = firstButtonText;
       closePopup(profilePopup);
     })
     .catch((error) => {
       console.log(error);
+      // submitUserInfo.textContent = firstButtonText;
+    })
+    .finally(() => {
       submitUserInfo.textContent = firstButtonText;
     });
 };
@@ -70,16 +80,19 @@ export function editAvatar(evt) {
 evt.preventDefault();
 const firstButtonText = submitAvatar.textContent;
 submitAvatar.textContent = 'Сохранение...';
-sendUserAvatar()
+sendUserAvatar(avatarInput.value)
 .then ((userAvatar) => {
   profileAvatar.src = userAvatar.avatar;
-  submitAvatar.textContent = firstButtonText;
+  // submitAvatar.textContent = firstButtonText;
   closePopup(avatarPopup);
 })
 .catch((error) => {
   console.log(error);
-  submitAvatar.textContent = firstButtonText;
-});
+  // submitAvatar.textContent = firstButtonText;
+})
+.finally(() => {
+  submitAvatar.textContent = firstButtonText
+})
 };
 
 

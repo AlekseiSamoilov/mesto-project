@@ -18,6 +18,38 @@ import { userInfo } from "./api";
 import { deleteCardFromServer } from "./api";
 import { addLikeToServer } from "./api";
 import { deleteLikeFromServer } from "./api";
+import { loadCards } from "./api";
+import { loadedUser } from "./index";
+
+// сохранение загруженных данных о пользователе
+// let loadedUser;
+
+// userInfo()
+//   .then((data) => {
+//     loadedUser = data;
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+// загрузка карточек при загрузке? страницы
+loadCards()
+    .then(cards => {
+      userInfo()
+        .then(user => {
+          cards.forEach(card => {
+            const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, user, card._id);
+            elementsBox.prepend(newCard);
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
 
 
 // Добавление новой карточки
@@ -25,28 +57,25 @@ export function addNewItem(evt) {
   evt.preventDefault(); // отменили стандартное действие формы
   const firstButtonText = submitNewItem.textContent; // сохранили в этой переменной первоначальный текст на кнопке, что бы потом возвратить как было
   submitNewItem.textContent = 'Сохранение...'; // присвоили тексту на кнопке новое значение
-  userInfo() // загрузка данных пользователя
-    .then(user => { 
+
       const title = newItemTitle.value;
       const imgSrc = newItemImg.value;
+
       sendNewCard(title, imgSrc)
         .then(card => {
-          const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, user, card._id);
+          const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, loadedUser, card._id);
           elementsBox.prepend(newCard);
           evt.target.reset();
-          submitNewItem.textContent = firstButtonText;
           submitNewItem.disabled = true;
           closePopup(newItemPopup);
         })
         .catch(error => {
           console.log( error);
+        })
+        .finally(() => {
           submitNewItem.textContent = firstButtonText;
         });
-    })
-    .catch(error => {
-      console.log( error);
-    });
-}
+};
 
 // пустая переменная, в ней будет сохранена функция удаления до момента подтверждения
 let deleteCallback = null;
@@ -75,7 +104,6 @@ export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
   newImg.src = imgSrc;
   newImg.alt = imgAlt;
   likeNumber.textContent = likes;
-  newCard.dataset.id = cardId;
 // постанвока лайков на карточках
   const likeButton = newCard.querySelector('.grid-item__like-button');
   likeButton.addEventListener('click', () => {
@@ -105,7 +133,6 @@ export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
   }
   trashButton.addEventListener('click', () => {
     confirmDelete(() => {
-    const cardId = newCard.dataset.id
     deleteCardFromServer(cardId)
     .then(() => {
       newCard.remove();
