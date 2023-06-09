@@ -14,11 +14,9 @@ import { openPopup } from "./modal";
 import { imagePopup } from "./modal";
 import { newItemForm } from "./modal";
 import { sendNewCard } from "./api";
-import { userInfo } from "./api";
 import { deleteCardFromServer } from "./api";
 import { addLikeToServer } from "./api";
 import { deleteLikeFromServer } from "./api";
-import { loadCards } from "./api";
 import { loadedUser } from "./index";
 
 // сохранение загруженных данных о пользователе
@@ -33,24 +31,22 @@ import { loadedUser } from "./index";
 //   });
 
 // загрузка карточек при загрузке? страницы
-loadCards()
-    .then(cards => {
-      userInfo()
-        .then(user => {
-          cards.forEach(card => {
-            const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, user, card._id);
-            elementsBox.prepend(newCard);
-          });
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
-
+// loadCards()
+//     .then(cards => {
+//       userInfo()
+//         .then(user => {
+//           cards.forEach(card => {
+//             const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, user, card._id);
+//             elementsBox.prepend(newCard);
+//           });
+//         })
+//         .catch(error => {
+//           console.log(error);
+//         });
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
 
 // Добавление новой карточки
 export function addNewItem(evt) {
@@ -124,8 +120,10 @@ export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
       .catch(error => console.error(error));
     } 
   });
+  
 // удаления карточки
   const trashButton = newCard.querySelector('.grid-item__trash');
+  
   if (owner === user._id) { 
     trashButton.style.display = 'block';
   } else {
@@ -145,6 +143,7 @@ export function createCard(title, imgSrc, imgAlt, likes, owner, user, cardId) {
   });
 // открытие попапа с картинкой
   newImg.addEventListener('click', (evt) => {
+    
     evt.preventDefault();
     const imageLink = newImg.src;
     popupImage.src = imageLink;

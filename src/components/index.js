@@ -9,9 +9,7 @@ import { editProfile } from './modal';
 import { enableValidation } from './validate';
 import { profileForm, newItemForm } from './modal';
 import { avatarPopup } from './modal';
-import { editAvatar } from './modal';
-import { avatarForm } from './modal';
-import { loadCards, user } from './api';
+import { loadCards } from './api';
 import { userInfo } from './api';
 import { profileName } from './modal';
 import { profileWork } from './modal';
@@ -19,17 +17,34 @@ import { nameInput } from './modal';
 import { jobInput } from './modal';
 import { profileAvatar } from './modal';
 import { avatarInput } from './modal';
+import { createCard } from './card';
+import { elementsBox } from './card';
+// import { avatarForm } from './modal';
+import { editAvatar } from './modal';
 export let loadedUser;
+export const avatarForm = document.forms["change-avatar-form"];
+Promise.all([userInfo(), loadCards()])
+    .then(([userData, cardsData]) => {
 
-Promise.all([
-    userInfo(),
-    loadCards()
-])
-    .then(([userInfoData, cardsData]) => {
+        // данные пользователя
+        loadedUser = userData;
+        profileName.textContent = loadedUser.name;
+        profileWork.textContent = loadedUser.about;
+        nameInput.value = loadedUser.name;
+        jobInput.value = loadedUser.about;
+        profileAvatar.src = loadedUser.avatar;
+        avatarInput.value = loadedUser.avatar;
+
+        // данные карточек
+        cardsData.forEach(card => {
+            const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, loadedUser, card._id);
+            elementsBox.prepend(newCard);
+        });
     })
     .catch((err) => {
         console.log(err);
-    })
+    });
+
 
 // валидация формы редактирования
 enableValidation({
@@ -40,11 +55,6 @@ enableValidation({
     errorClass: 'form__input-error_active'
 });
 
-// Загрузка карточек
-document.addEventListener('DOMContentLoaded', loadCards);
-
-// Загрузка информации о пользователе
-// document.addEventListener('DOMContentLoaded', userInfo);
 
 // закрытие любого попапа по клику на оверлей и клику по крестику
 popups.forEach((popup) => {
@@ -57,31 +67,6 @@ popups.forEach((popup) => {
         };
     });
 });
-
-// вызов функций связаных с пользователем
-
-userInfo()
-  .then((data) => {
-    loadedUser = data;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-  userInfo () 
-  .then(user => {
-    profileName.textContent = user.name;
-    profileWork.textContent = user.about;
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileWork.textContent;
-    profileAvatar.src = user.avatar;
-    avatarInput.value = user.avatar;
-
-    return user;
-  })
-  .catch(error => {
-    console.log(error); 
-  });
 
 
 // Открытие попапа редактирования аватара

@@ -32,18 +32,6 @@ export const loadCards = () => {
     headers: config.headers
   })
   .then(getResponseData);
-  // .then(cards => {
-  //   userInfo()
-  //     .then(user => {
-  //       cards.forEach(card => {
-  //         const newCard = createCard(card.name, card.link, card.name, card.likes.length, card.owner._id, user, card._id);
-  //         elementsBox.prepend(newCard);
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // })
 };
 
 
@@ -66,15 +54,6 @@ export function sendNewCard (title, imgSrc) {
     headers: config.headers
   })
   .then(getResponseData)
-  // .then(user => {
-  //   profileName.textContent = user.name;
-  //   profileWork.textContent = user.about;
-  //   nameInput.value = user.name;
-  //   jobInput.value = user.about;
-  //   profileAvatar.src = user.avatar;
-  //   avatarInput.value = user.avatar;
-  //   return user;
-  // })
 };
 
 

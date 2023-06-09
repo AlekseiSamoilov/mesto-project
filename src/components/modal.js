@@ -16,7 +16,7 @@ export const popups = document.querySelectorAll('.popup');
 export const formInput = document.querySelector('.form__text');
 export const profileForm = document.forms["edit-form"];
 export const newItemForm = document.forms["new-form"];
-export const avatarForm = document.forms["change-avatar-form"];
+
 export const submitButton = document.querySelector('#submitButton');
 export const profileAvatar = document.querySelector('.profile__avatar');
 export const avatarInput = document.querySelector('#avatar')
@@ -83,12 +83,12 @@ submitAvatar.textContent = 'Сохранение...';
 sendUserAvatar(avatarInput.value)
 .then ((userAvatar) => {
   profileAvatar.src = userAvatar.avatar;
-  // submitAvatar.textContent = firstButtonText;
+
   closePopup(avatarPopup);
 })
 .catch((error) => {
   console.log(error);
-  // submitAvatar.textContent = firstButtonText;
+
 })
 .finally(() => {
   submitAvatar.textContent = firstButtonText
