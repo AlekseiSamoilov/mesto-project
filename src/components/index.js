@@ -23,6 +23,7 @@ import { elementsBox } from './card';
 import { editAvatar } from './modal';
 export let loadedUser;
 export const avatarForm = document.forms["change-avatar-form"];
+
 Promise.all([userInfo(), loadCards()])
     .then(([userData, cardsData]) => {
 
@@ -63,6 +64,7 @@ popups.forEach((popup) => {
             closePopup(popup);
         };
         if (evt.target.classList.contains('popup__close-button')) {
+            evt.preventDefault();
             closePopup(popup);
         };
     });
