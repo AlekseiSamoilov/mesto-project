@@ -19,10 +19,12 @@ import { profileAvatar } from './modal';
 import { avatarInput } from './modal';
 import { createCard } from './card';
 import { elementsBox } from './card';
-// import { avatarForm } from './modal';
 import { editAvatar } from './modal';
+// import { Popup } from './UserInfo';
 export let loadedUser;
 export const avatarForm = document.forms["change-avatar-form"];
+import { Popup } from './UserInfo';
+// import { UserInfo, Api } from './UserInfo';
 
 Promise.all([userInfo(), loadCards()])
     .then(([userData, cardsData]) => {
@@ -31,8 +33,8 @@ Promise.all([userInfo(), loadCards()])
         loadedUser = userData;
         profileName.textContent = loadedUser.name;
         profileWork.textContent = loadedUser.about;
-        nameInput.value = loadedUser.name;
-        jobInput.value = loadedUser.about;
+        // nameInput.value = loadedUser.name;
+        // jobInput.value = loadedUser.about;
         profileAvatar.src = loadedUser.avatar;
         avatarInput.value = loadedUser.avatar;
 
@@ -71,18 +73,20 @@ popups.forEach((popup) => {
 });
 
 
-// Открытие попапа редактирования аватара
+// // Открытие попапа редактирования аватара
 avatarContainer.addEventListener('click', () => {
-    openPopup(avatarPopup);
+    popupAvatarEdit.open();
 })
-// Открытие попапа добавления нового элемента
+// // Открытие попапа добавления нового элемента
 addButton.addEventListener('click', () => {
-    openPopup(newItemPopup);
+    popupNewCard.open();
 });
 
 // Открытие попапа редактирования профиля
 editButton.addEventListener('click', () => {
-    openPopup(profilePopup);
+    nameInput.value = profileName.textContent; 
+    jobInput.value = profileWork.textContent; 
+    popupProfile.open();
 });
 
 //   редактирвоание информации профиля
@@ -93,3 +97,21 @@ newItemForm.addEventListener('submit', addNewItem);
 
 //  Смена аватара
 avatarForm.addEventListener('submit', editAvatar);
+
+// const api = new Api({
+//     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
+//     headers: {
+//       authorization: 'af2c4d49-40c6-44a3-a4f7-8cf5a2190518',
+//       'Content-Type': 'application/json'
+//     }
+//   });
+
+// const userInfo = new UserInfo({nameSelector: 'profileName', infoSelector: 'profileWork'}, api);
+
+
+// userInfo.getUserInfo();
+// userInfo.setUserInfo({name: 'newName', about: 'newAbout'});
+
+const popupProfile = new Popup('.profile-popup');
+const popupNewCard = new Popup('.new-item-popup');
+const popupAvatarEdit = new Popup('.edit-avatar-popup');

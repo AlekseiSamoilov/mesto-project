@@ -16,7 +16,6 @@ export const popups = document.querySelectorAll('.popup');
 export const formInput = document.querySelector('.form__text');
 export const profileForm = document.forms["edit-form"];
 export const newItemForm = document.forms["new-form"];
-
 export const submitButton = document.querySelector('#submitButton');
 export const profileAvatar = document.querySelector('.profile__avatar');
 export const avatarInput = document.querySelector('#avatar')
